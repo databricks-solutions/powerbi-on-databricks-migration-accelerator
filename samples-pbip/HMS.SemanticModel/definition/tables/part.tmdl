@@ -1,0 +1,103 @@
+table part
+	lineageTag: 8d06cd6d-c852-4e60-8d4d-c749d0a72550
+
+	column P_PARTKEY
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: abb46234-fb0e-4631-a08a-370d13d437a2
+		summarizeBy: none
+		sourceColumn: P_PARTKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column P_NAME
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: bb8745d5-f390-450c-a535-b502b05dbded
+		summarizeBy: none
+		sourceColumn: P_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column P_MFGR
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: a3ce0e99-c1c1-4019-8b21-b210acbf75b0
+		summarizeBy: none
+		sourceColumn: P_MFGR
+
+		annotation SummarizationSetBy = Automatic
+
+	column P_BRAND
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 201903cd-c722-4b8e-badc-612b1319d834
+		summarizeBy: none
+		sourceColumn: P_BRAND
+
+		annotation SummarizationSetBy = Automatic
+
+	column P_TYPE
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: ba7baf34-628c-4b76-8d82-d7dc90942b18
+		summarizeBy: none
+		sourceColumn: P_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column P_SIZE
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 71348bcc-2c27-47df-bd7a-ea86a6e5fbcd
+		summarizeBy: none
+		sourceColumn: P_SIZE
+
+		annotation SummarizationSetBy = Automatic
+
+	column P_CONTAINER
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: d495fb07-67e8-4a4e-9f69-adffc2017f1b
+		summarizeBy: none
+		sourceColumn: P_CONTAINER
+
+		annotation SummarizationSetBy = Automatic
+
+	column P_RETAILPRICE
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: 4073ac06-0038-4fe5-b2d3-09b8f5743bfa
+		summarizeBy: none
+		sourceColumn: P_RETAILPRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column P_COMMENT
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: fbd45206-c474-45bb-9b45-9d2171455e15
+		summarizeBy: none
+		sourceColumn: P_COMMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition part = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-2219810816778143.3.azuredatabricks.net", "/sql/1.0/warehouses/6fdebb669d2772a3", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    samples_Database = Source{[Name="hive_metastore",Kind="Database"]}[Data],
+				    tpch_Schema = samples_Database{[Name="tpch_sf1_delta_nopartitions",Kind="Schema"]}[Data],
+				    part_Table = tpch_Schema{[Name="part",Kind="Table"]}[Data]
+				in
+				    part_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

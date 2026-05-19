@@ -1,0 +1,59 @@
+table nation
+	lineageTag: 47dd38ab-c011-4ffd-8bb5-c0c1711bf2bb
+
+	column n_nationkey
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4a3e1eba-fcf0-4910-a094-17e3a9d5f9f8
+		summarizeBy: none
+		sourceColumn: n_nationkey
+
+		annotation SummarizationSetBy = Automatic
+
+	column n_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nchar
+		lineageTag: 5c2b3897-f7ed-4385-b13c-3d7a79bd8171
+		summarizeBy: none
+		sourceColumn: n_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column n_regionkey
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 5739cd6c-83ca-4744-9c0f-670b2217539d
+		summarizeBy: none
+		sourceColumn: n_regionkey
+
+		annotation SummarizationSetBy = Automatic
+
+	column n_comment
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(152)
+		lineageTag: 4f7088a3-892b-4c9e-807f-889ae47dcd03
+		summarizeBy: none
+		sourceColumn: n_comment
+
+		annotation SummarizationSetBy = Automatic
+
+	partition nation = m
+		mode: directQuery
+		source =
+				let
+				    Source = AmazonRedshift.Database("redshift-cluster-pbi-accelerator.czqsva194jk4.us-west-2.redshift.amazonaws.com:5439","sample_data_dev"),
+				    tpch = Source{[Name="tpch"]}[Data],
+				    nation = tpch{[Name="nation"]}[Data]
+				in
+				    nation
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

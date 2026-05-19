@@ -1,0 +1,23 @@
+relationship bd1adda6-aed0-b0f2-c2a8-e7f0a244838c
+	crossFilteringBehavior: bothDirections
+	fromColumn: lineitem.L_ORDERKEY
+	toColumn: orders.O_ORDERKEY
+
+relationship a3f76482-2946-4f81-3732-35dff1765ca1
+	crossFilteringBehavior: bothDirections
+	fromColumn: orders.O_CUSTKEY
+	toColumn: customer.C_CUSTKEY
+
+relationship 30fda3b3-4424-0876-a2e4-ba7638f1c874
+	fromColumn: nation.N_REGIONKEY
+	toColumn: region.R_REGIONKEY
+
+relationship 4a5aa507-4794-834a-093c-2be845364139
+	fromColumn: customer.C_NATIONKEY
+	toColumn: nation.N_NATIONKEY
+
+relationship eb4412c1-28d6-75a9-3f1d-920a33be0322
+	crossFilteringBehavior: bothDirections
+	fromColumn: lineitem.L_PARTKEY
+	toColumn: part.P_PARTKEY
+

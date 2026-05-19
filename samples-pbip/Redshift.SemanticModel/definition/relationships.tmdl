@@ -1,0 +1,25 @@
+relationship 7f735ed0-8083-3723-26ee-6dbb101fb9b6
+	relyOnReferentialIntegrity
+	fromColumn: lineitem.l_partkey
+	toColumn: part.p_partkey
+
+relationship ce4560f7-d14e-71b4-c703-b51c3b2ce6fb
+	relyOnReferentialIntegrity
+	fromColumn: nation.n_regionkey
+	toColumn: region.r_regionkey
+
+relationship c7ae2313-2c3f-490a-65fc-a37f439ec087
+	relyOnReferentialIntegrity
+	fromColumn: customer.c_nationkey
+	toColumn: nation.n_nationkey
+
+relationship afa0864b-157e-a3cf-a438-ee5b3945b80a
+	relyOnReferentialIntegrity
+	fromColumn: orders.o_custkey
+	toColumn: customer.c_custkey
+
+relationship 1a91d01b-5996-e599-2466-294fc7c428ab
+	relyOnReferentialIntegrity
+	fromColumn: lineitem.l_orderkey
+	toColumn: orders.o_orderkey
+

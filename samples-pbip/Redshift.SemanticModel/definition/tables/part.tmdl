@@ -1,0 +1,111 @@
+table part
+	lineageTag: 37173bdf-9fc4-4a88-9c8d-df6c285c0de7
+
+	column p_partkey
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: f4826ff1-e111-4efd-b63f-c05a82038e1a
+		summarizeBy: none
+		sourceColumn: p_partkey
+
+		annotation SummarizationSetBy = Automatic
+
+	column p_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(55)
+		lineageTag: eef230ae-cc12-41e8-910b-f1cc69cd78c3
+		summarizeBy: none
+		sourceColumn: p_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column p_mfgr
+		dataType: string
+		isNullable: false
+		sourceProviderType: nchar
+		lineageTag: e1596925-5ef0-42d5-922d-0ad6354bfa7d
+		summarizeBy: none
+		sourceColumn: p_mfgr
+
+		annotation SummarizationSetBy = Automatic
+
+	column p_brand
+		dataType: string
+		isNullable: false
+		sourceProviderType: nchar
+		lineageTag: 31b81515-f191-48d2-b936-4f92f4620a97
+		summarizeBy: none
+		sourceColumn: p_brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column p_type
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(25)
+		lineageTag: 9bc0bd3c-31c4-4d75-80a5-81dd6d4c4669
+		summarizeBy: none
+		sourceColumn: p_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column p_size
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 54c435cc-03d8-4afa-9d76-dfb82eff96a5
+		summarizeBy: none
+		sourceColumn: p_size
+
+		annotation SummarizationSetBy = Automatic
+
+	column p_container
+		dataType: string
+		isNullable: false
+		sourceProviderType: nchar
+		lineageTag: ff06434c-e0c9-40ea-90fe-5ac8831194dd
+		summarizeBy: none
+		sourceColumn: p_container
+
+		annotation SummarizationSetBy = Automatic
+
+	column p_retailprice
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(12, 2)
+		lineageTag: 086d7fe7-43a3-4444-b18c-6e611fd34660
+		summarizeBy: none
+		sourceColumn: p_retailprice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column p_comment
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(23)
+		lineageTag: 09145324-2656-4a28-a4c4-9beefab91f03
+		summarizeBy: none
+		sourceColumn: p_comment
+
+		annotation SummarizationSetBy = Automatic
+
+	partition part = m
+		mode: directQuery
+		source =
+				let
+				    Source = AmazonRedshift.Database("redshift-cluster-pbi-accelerator.czqsva194jk4.us-west-2.redshift.amazonaws.com:5439","sample_data_dev"),
+				    tpch = Source{[Name="tpch"]}[Data],
+				    part = tpch{[Name="part"]}[Data]
+				in
+				    part
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,203 @@
+table lineitem
+	lineageTag: bc80b9d2-9688-4084-95f4-3d3cf92e3232
+
+	column L_ORDERKEY
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(38, 0)
+		lineageTag: e36631f7-8b28-41b6-bae3-8b846c79d9b2
+		summarizeBy: none
+		sourceColumn: L_ORDERKEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column L_PARTKEY
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 0c093204-4972-40ca-9472-a24920058703
+		summarizeBy: none
+		sourceColumn: L_PARTKEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column L_SUPPKEY
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 1682c22b-95dd-4c50-ac0e-2396e9d369fd
+		summarizeBy: sum
+		sourceColumn: L_SUPPKEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column L_LINENUMBER
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 2cef01a0-752f-4d85-9af0-105520380638
+		summarizeBy: sum
+		sourceColumn: L_LINENUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column L_QUANTITY
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(12, 2)
+		lineageTag: ceb6bb5d-1b59-4291-811b-8f19e909d791
+		summarizeBy: sum
+		sourceColumn: L_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column L_EXTENDEDPRICE
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(12, 2)
+		lineageTag: c228169c-e645-4bbe-8e63-2782c5544c64
+		summarizeBy: sum
+		sourceColumn: L_EXTENDEDPRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column L_DISCOUNT
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(12, 2)
+		lineageTag: 076ea381-2c96-475b-b924-608050f4f85c
+		summarizeBy: sum
+		sourceColumn: L_DISCOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column L_TAX
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(12, 2)
+		lineageTag: af5be9b9-ad75-4a86-b7b6-6933bcf7a573
+		summarizeBy: sum
+		sourceColumn: L_TAX
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column L_RETURNFLAG
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(1)
+		lineageTag: f7f864ce-c2cf-4a1a-b287-7ddd380ebfbf
+		summarizeBy: none
+		sourceColumn: L_RETURNFLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_LINESTATUS
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(1)
+		lineageTag: 5661f9cf-a4f4-4c56-9aed-657eb434dbe8
+		summarizeBy: none
+		sourceColumn: L_LINESTATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_SHIPDATE
+		dataType: dateTime
+		isNullable: false
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: f2445fb4-6dbd-454b-8a8b-32ad1ae10bdf
+		summarizeBy: none
+		sourceColumn: L_SHIPDATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column L_COMMITDATE
+		dataType: dateTime
+		isNullable: false
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 1ecf455e-f11b-4334-92f1-bb0ec1ad3206
+		summarizeBy: none
+		sourceColumn: L_COMMITDATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column L_RECEIPTDATE
+		dataType: dateTime
+		isNullable: false
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 9eb0942e-9cda-48a4-87fb-40c40545e03b
+		summarizeBy: none
+		sourceColumn: L_RECEIPTDATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column L_SHIPINSTRUCT
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(25)
+		lineageTag: dc7f1e32-7f3b-425e-9254-6caee4db3c94
+		summarizeBy: none
+		sourceColumn: L_SHIPINSTRUCT
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_SHIPMODE
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(10)
+		lineageTag: 1c0735f9-d820-4c8d-acf2-6dca931ee7e6
+		summarizeBy: none
+		sourceColumn: L_SHIPMODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_COMMENT
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(44)
+		lineageTag: f9824851-3961-43b8-8758-96bac2c73f9f
+		summarizeBy: none
+		sourceColumn: L_COMMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition lineitem = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("tximbzh-hu22536.snowflakecomputing.com","COMPUTE_WH"),
+				    SNOWFLAKE_TPCH_Database = Source{[Name="SNOWFLAKE_SAMPLE_DATA",Kind="Database"]}[Data],
+				    TPCH_SF1_Schema = SNOWFLAKE_TPCH_Database{[Name="TPCH_SF1",Kind="Schema"]}[Data],
+				    LINEITEM_Table = TPCH_SF1_Schema{[Name="LINEITEM",Kind="Table"]}[Data]
+				in
+				    LINEITEM_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

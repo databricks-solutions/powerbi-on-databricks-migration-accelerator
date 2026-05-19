@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "HMS-incremental-refresh"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "54977e79-2c14-4939-a8af-dfb75e68eb89"
+  }
+}

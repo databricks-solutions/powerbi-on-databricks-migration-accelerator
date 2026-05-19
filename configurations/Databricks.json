@@ -1,0 +1,113 @@
+{
+    "$schema":              "../Configuration.schema.json",
+    "Backup":               false,
+    "RefreshAfterUpdate":   false,
+
+    "Properties": {
+        "CompatibilityLevel":              1569,
+        "MaxParallelismPerQuery":          11,
+        "DataSourceDefaultMaxConnections": 20
+    }, 
+
+    "Parameterize": true,
+    "Parameters": [
+        {
+            "Name" : "ServerHostname",
+            "Value": "adb-2219810816778143.3.azuredatabricks.net",
+            "Type":  "Text"
+        },
+        {
+            "Name" : "HTTPPath",
+            "Value": "/sql/1.0/warehouses/a5ad4687dadae274",
+            "Type":  "Text"
+        },
+        {
+            "Name" : "Catalog",
+            "Value": "tpch",
+            "Type":  "Text"
+        },
+        {
+            "Name" : "Schema",
+            "Value": "sf1",
+            "Type":  "Text"
+        }
+    ],
+
+    "Updates": [
+        {
+            "Name":           "Databricks - parameterize connection",
+            "Enabled":        true,
+            "Order":          1,
+            "SearchPattern":  "(?<Start>[\\s]+[^\\s]+[\\s]*=[\\s]*Databricks\\.Catalogs[\\s]*\\([\\s]*)(?<ServerHostname>\"[^\"]+\")(?<Between>[\\s]*\\,[\\s]*)(?<HTTPPath>\"[^\"]+\")",
+            "ReplacePattern": "${Start}ServerHostname${Between}HTTPPath"
+        },
+        {
+            "Name":           "Databricks - parameterize catalog",
+            "Enabled":        true,
+            "Order":          2,
+            "SearchPattern":  "(?<Start>=[\\s]*Source[\\s]*{[\\s]*\\[[\\s]*Name[\\s]*=[\\s]*)(?<Catalog>\"[^\\\"]+\")(?<Ending>[\\s]*,[\\s]*Kind[\\s]*=[\\s]*\"Database\")",
+            "ReplacePattern": "${Start}Catalog${Ending}"
+        },
+        {
+            "Name":           "Databricks - parameterize schema",
+            "Enabled":        true,
+            "Order":          3,
+            "SearchPattern":  "(?<Start>[\\s]*{[\\s]*\\[[\\s]*Name[\\s]*=[\\s]*)(?<Schema>\"[^\\\"]+\")(?<Ending>[\\s]*,[\\s]*Kind[\\s]*=[\\s]*\"Schema\")",
+            "ReplacePattern": "${Start}Schema${Ending}"
+        },
+
+        {
+            "Name":           "Databricks - parameterize Native Queries",
+            "Enabled":        true,
+            "Order":          4,
+            "SearchPattern":  "(?<Start>[\\s]+[^\\s]+[\\s]*=[\\s]*Value.NativeQuery\\([\\s]*Databricks\\.Catalogs[\\s]*\\([\\s]*)(?<ServerHostname>\"[^\"]+\")(?<Between>[\\s]*\\,[\\s]*)(?<HTTPPath>\"[^\"]+\")",
+            "ReplacePattern": "${Start}ServerHostname${Between}HTTPPath"
+        },
+        {
+            "Name":           "Databricks - parameterize Native Queries catalog 1",
+            "Enabled":        true,
+            "Order":          5,
+            "SearchPattern":  "(?<Start>Name[\\s]*=[\\s]*)(?<Catalog>\"hive_metastore\")(?<Ending>[\\s]*,[\\s]*Kind[\\s]*=[\\s]*\"Database\")",
+            "ReplacePattern": "${Start}Catalog${Ending}"
+        },
+        {
+            "Name":           "Databricks - parameterize Native Queries catalog 2",
+            "Enabled":        true,
+            "Order":          5,
+            "SearchPattern":  "(?<Start>Catalog[\\s]*=[\\s]*)(?<Catalog>\"hive_metastore\")",
+            "ReplacePattern": "${Start}Catalog"
+        }
+    ],
+
+
+    "Folders":
+    [
+        {
+            "Path":                 "./_demo",
+            "IncludeAll":           false,
+
+            "RefreshAfterUpdate":   null,
+            "Properties":           {}, 
+
+            "Parameterize":         null,
+            "Parameters":           null,
+            
+            "Datasets": [
+                {
+                    "Name":         "Databricks",
+                    "Skip":         false,
+                    "Properties":   {},
+
+                    "Parameterize": null,
+                    "Parameters":   null,
+
+                    "Updates":      null
+                }
+            ]
+        }
+    ],
+    
+    "Workspaces":
+    [   
+    ]
+}

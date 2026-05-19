@@ -1,0 +1,197 @@
+table lineitem
+	lineageTag: bc80b9d2-9688-4084-95f4-3d3cf92e3232
+
+	column L_ORDERKEY
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 52977fd7-23c8-4182-a78e-21b54fc93d35
+		summarizeBy: none
+		sourceColumn: L_ORDERKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_PARTKEY
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 59866a8d-2186-4ad2-a892-2e37a59f7163
+		summarizeBy: none
+		sourceColumn: L_PARTKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_SUPPKEY
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2f59ec8c-f6d4-432f-8d55-9d4338540f32
+		summarizeBy: sum
+		sourceColumn: L_SUPPKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_LINENUMBER
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 587b148e-5175-47d1-a838-174569e3ffd9
+		summarizeBy: sum
+		sourceColumn: L_LINENUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_QUANTITY
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(15, 2)
+		lineageTag: 2af7d3a4-18c4-4de1-97be-430cf5471773
+		summarizeBy: sum
+		sourceColumn: L_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column L_EXTENDEDPRICE
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(15, 2)
+		lineageTag: 9c880324-7b50-45e9-a30d-f46177b0185f
+		summarizeBy: sum
+		sourceColumn: L_EXTENDEDPRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column L_DISCOUNT
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(15, 2)
+		lineageTag: 23437b3f-45c1-42fb-abb5-b188aff8bf8e
+		summarizeBy: sum
+		sourceColumn: L_DISCOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column L_TAX
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(15, 2)
+		lineageTag: 2c5b5506-bab7-44f5-baee-a716459cafa5
+		summarizeBy: sum
+		sourceColumn: L_TAX
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column L_RETURNFLAG
+		dataType: string
+		isNullable: false
+		sourceProviderType: char
+		lineageTag: 35ebc019-4af7-4054-8176-55454039f448
+		summarizeBy: none
+		sourceColumn: L_RETURNFLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_LINESTATUS
+		dataType: string
+		isNullable: false
+		sourceProviderType: char
+		lineageTag: 8374f4da-a419-427d-8efc-d22a3643be65
+		summarizeBy: none
+		sourceColumn: L_LINESTATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_SHIPDATE
+		dataType: dateTime
+		isNullable: false
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 027b34a1-12e2-44e0-9ffb-830198de5a18
+		summarizeBy: none
+		sourceColumn: L_SHIPDATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column L_COMMITDATE
+		dataType: dateTime
+		isNullable: false
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: a7d0d29f-77c0-4896-80bd-70726afb4dd0
+		summarizeBy: none
+		sourceColumn: L_COMMITDATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column L_RECEIPTDATE
+		dataType: dateTime
+		isNullable: false
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 3bab3662-a4d8-4dd2-8203-a79aa78f9115
+		summarizeBy: none
+		sourceColumn: L_RECEIPTDATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column L_SHIPINSTRUCT
+		dataType: string
+		isNullable: false
+		sourceProviderType: char
+		lineageTag: b7dab4b8-89dd-4701-a156-389bc5900333
+		summarizeBy: none
+		sourceColumn: L_SHIPINSTRUCT
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_SHIPMODE
+		dataType: string
+		isNullable: false
+		sourceProviderType: char
+		lineageTag: 1ee78d6c-5f08-4a2f-969f-057ef7c65eaf
+		summarizeBy: none
+		sourceColumn: L_SHIPMODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_COMMENT
+		dataType: string
+		isNullable: false
+		sourceProviderType: varchar(44)
+		lineageTag: 79eaf24e-85b2-4539-9340-2f0ba97b854d
+		summarizeBy: none
+		sourceColumn: L_COMMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition lineitem = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("synapse-migration-demo.sql.azuresynapse.net", "tpch"),
+				    dbo_LINEITEM = Source{[Schema="dbo",Item="LINEITEM"]}[Data]
+				in
+				    dbo_LINEITEM
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,61 @@
+table nation
+	lineageTag: e144a950-66fe-401f-8938-ae096186d5fb
+
+	column N_NATIONKEY
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(38, 0)
+		lineageTag: eef74d34-f38f-49bd-9d90-e4ca7471c474
+		summarizeBy: none
+		sourceColumn: N_NATIONKEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column N_NAME
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(25)
+		lineageTag: 97cb1ab3-9c70-49fe-9daf-cff57906dcf1
+		summarizeBy: none
+		sourceColumn: N_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column N_REGIONKEY
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(38, 0)
+		lineageTag: fbaef634-27dc-4506-8d9a-1e01d14a2397
+		summarizeBy: none
+		sourceColumn: N_REGIONKEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column N_COMMENT
+		dataType: string
+		sourceProviderType: nvarchar(152)
+		lineageTag: 54b2d53c-ba4a-4c2c-9ac6-8c62f158e1c4
+		summarizeBy: none
+		sourceColumn: N_COMMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition nation = m
+		mode: dual
+		source =
+				let
+				    Source = Snowflake.Databases("tximbzh-hu22536.snowflakecomputing.com","COMPUTE_WH"),
+				    SNOWFLAKE_TPCH_Database = Source{[Name="SNOWFLAKE_SAMPLE_DATA",Kind="Database"]}[Data],
+				    TPCH_SF1_Schema = SNOWFLAKE_TPCH_Database{[Name="TPCH_SF1",Kind="Schema"]}[Data],
+				    NATION_Table = TPCH_SF1_Schema{[Name="NATION",Kind="Table"]}[Data]
+				in
+				    NATION_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

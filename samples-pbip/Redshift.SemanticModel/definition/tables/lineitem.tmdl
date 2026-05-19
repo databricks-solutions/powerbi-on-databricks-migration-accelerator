@@ -1,0 +1,198 @@
+table lineitem
+	lineageTag: e50fe420-0188-4619-9b9d-173e6d3d5eb6
+
+	column l_orderkey
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: a28fa20c-be3e-4755-8eea-e005a65d8b7b
+		summarizeBy: none
+		sourceColumn: l_orderkey
+
+		annotation SummarizationSetBy = Automatic
+
+	column l_partkey
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 58260b2d-be93-46b4-9777-e9230441dc20
+		summarizeBy: none
+		sourceColumn: l_partkey
+
+		annotation SummarizationSetBy = Automatic
+
+	column l_suppkey
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: a588b80a-49ca-4ceb-900e-2be9c68f1696
+		summarizeBy: sum
+		sourceColumn: l_suppkey
+
+		annotation SummarizationSetBy = Automatic
+
+	column l_linenumber
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: d75594c4-f10d-4aca-84ff-59c32f3efdc9
+		summarizeBy: sum
+		sourceColumn: l_linenumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column l_quantity
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(12, 2)
+		lineageTag: eb729382-3f94-4901-8dd8-001bef632d1e
+		summarizeBy: sum
+		sourceColumn: l_quantity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column l_extendedprice
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(12, 2)
+		lineageTag: 43f37d65-1575-4426-9a5e-b77a54b6a6a5
+		summarizeBy: sum
+		sourceColumn: l_extendedprice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column l_discount
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(12, 2)
+		lineageTag: 48517a55-faf0-4fbe-839d-af2bed64132f
+		summarizeBy: sum
+		sourceColumn: l_discount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column l_tax
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(12, 2)
+		lineageTag: 3a8ba3f9-8dd3-4e43-a4d3-f06e3ad13bb2
+		summarizeBy: sum
+		sourceColumn: l_tax
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column l_returnflag
+		dataType: string
+		isNullable: false
+		sourceProviderType: nchar
+		lineageTag: abc6aabf-eeb5-49c7-92e1-ba6e45ff8ccc
+		summarizeBy: none
+		sourceColumn: l_returnflag
+
+		annotation SummarizationSetBy = Automatic
+
+	column l_linestatus
+		dataType: string
+		isNullable: false
+		sourceProviderType: nchar
+		lineageTag: f71dc0cf-2bc8-40d6-a2ed-9e9eb2a086cc
+		summarizeBy: none
+		sourceColumn: l_linestatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column l_shipdate
+		dataType: dateTime
+		isNullable: false
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: ba8f10cf-45be-4363-bcd1-3044dd52b6b5
+		summarizeBy: none
+		sourceColumn: l_shipdate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column l_commitdate
+		dataType: dateTime
+		isNullable: false
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 4f80cbbb-7863-4620-a94e-cafd6bbd2edc
+		summarizeBy: none
+		sourceColumn: l_commitdate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column l_receiptdate
+		dataType: dateTime
+		isNullable: false
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 74ac6e08-4000-4e4b-b823-eb812072bf56
+		summarizeBy: none
+		sourceColumn: l_receiptdate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column l_shipinstruct
+		dataType: string
+		isNullable: false
+		sourceProviderType: nchar
+		lineageTag: d02f7c31-5383-472c-9548-46d91ee0acb6
+		summarizeBy: none
+		sourceColumn: l_shipinstruct
+
+		annotation SummarizationSetBy = Automatic
+
+	column l_shipmode
+		dataType: string
+		isNullable: false
+		sourceProviderType: nchar
+		lineageTag: 571c7ecf-06a4-4666-bd94-34a86b433eeb
+		summarizeBy: none
+		sourceColumn: l_shipmode
+
+		annotation SummarizationSetBy = Automatic
+
+	column l_comment
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(44)
+		lineageTag: ec761eff-bc01-4680-96c9-3ed5375bf1bb
+		summarizeBy: none
+		sourceColumn: l_comment
+
+		annotation SummarizationSetBy = Automatic
+
+	partition lineitem = m
+		mode: directQuery
+		source =
+				let
+				    Source = AmazonRedshift.Database("redshift-cluster-pbi-accelerator.czqsva194jk4.us-west-2.redshift.amazonaws.com:5439","sample_data_dev"),
+				    tpch = Source{[Name="tpch"]}[Data],
+				    lineitem = tpch{[Name="lineitem"]}[Data]
+				in
+				    lineitem
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

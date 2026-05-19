@@ -1,0 +1,148 @@
+table MeasuresTable
+	lineageTag: a30468de-0812-417d-bbb8-23cd7496d61a
+
+	measure _SumTotalPrice = SUM(orders[O_TOTALPRICE])
+		lineageTag: 7506d913-9b58-4af3-b43e-e150079be9f3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice01 = CALCULATE([_SumTotalPrice], part[P_CONTAINER]="JUMBO BAG")
+		lineageTag: 8ba2a302-b3e9-4292-bd50-f6a952a8e570
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice21 = CALCULATE([_SumTotalPrice], part[p_container]="SM PACK")
+		lineageTag: 4a1c60f9-35dd-4329-80f1-27d926474acc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice10 = CALCULATE([_SumTotalPrice], part[p_container]="LG BOX")
+		lineageTag: 2623ab9b-9583-4950-af26-c676525fedf8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice41 = CALCULATE([_SumTotalPrice], part[p_container]="WRAP DRUM")
+		lineageTag: cbfaaaa7-df2c-44dd-913b-a54684408a3a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice61 = CALCULATE([_SumTotalPrice], part[p_container]="MED CASE")
+		lineageTag: 32d53869-f507-4564-bd7d-23d278beb5ae
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice02 = CALCULATE([_SumTotalPrice], part[P_CONTAINER]="JUMBO BOX")
+		lineageTag: 56ccc8b0-a3b4-49fb-afea-c08ed57d4845
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice81 = CALCULATE([_SumTotalPrice], part[p_container]="MED PACK")
+		lineageTag: 71646710-de05-4f90-9a86-b675a8ec44e5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice91 = CALCULATE([_SumTotalPrice], part[p_container]="MED JAR")
+		lineageTag: 2d25df02-69ea-45a1-be7d-db86245ddd7f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice15 = CALCULATE([_SumTotalPrice], part[p_container]="LG PACK")
+		lineageTag: 03f13004-f370-425a-a232-2a3d4e793888
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice03 = CALCULATE([_SumTotalPrice], part[p_container]="JUMBO CAN")
+		lineageTag: a0b94781-2ef0-40ab-8628-b247d92470a2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice04 = CALCULATE([_SumTotalPrice], part[p_container]="JUMBO CASE")
+		lineageTag: f602e592-1522-4a5d-934a-b55c6cc79b9a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice05 = CALCULATE([_SumTotalPrice], part[p_container]="JUMBO DRUM")
+		lineageTag: 573c1175-2d5b-42db-b8c2-731b5b0e0557
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice06 = CALCULATE([_SumTotalPrice], part[p_container]="JUMBO JAR")
+		lineageTag: 0dcc1427-2e4b-499c-aaac-3ce0d67b9139
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice07 = CALCULATE([_SumTotalPrice], part[p_container]="JUMBO PACK")
+		lineageTag: cff2ca39-197c-4070-a02d-e4c82072bb03
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice08 = CALCULATE([_SumTotalPrice], part[p_container]="JUMBO PKG")
+		lineageTag: 36eb1649-57a2-4849-aa2a-1d93aa5ea794
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice09 = CALCULATE([_SumTotalPrice], part[p_container]="LG BAG")
+		lineageTag: 526b811f-84a3-446f-b7ef-839002f53e0b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice11 = CALCULATE([_SumTotalPrice], part[p_container]="LG CAN")
+		lineageTag: f3927a54-6d1d-413e-952a-d04d6a91cb8d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice12 = CALCULATE([_SumTotalPrice], part[p_container]="LG CASE")
+		lineageTag: e6b25cb0-4b3c-4151-b0e4-a9628b87914c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice13 = CALCULATE([_SumTotalPrice], part[p_container]="LG DRUM")
+		lineageTag: b117f665-74fd-4ad6-b38e-f349aeae02b4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice14 = CALCULATE([_SumTotalPrice], part[p_container]="LG JAR")
+		lineageTag: 5f88a4c0-8c54-4f21-b26f-967843f93c13
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice16 = CALCULATE([_SumTotalPrice], part[p_container]="LG PKG")
+		lineageTag: e679ed39-ff68-4116-bda8-aaa5c415140e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice17 = CALCULATE([_SumTotalPrice], part[p_container]="MED BAG")
+		lineageTag: 6da0ac1a-b755-4094-9ea3-19d5eb3c6b4f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice18 = CALCULATE([_SumTotalPrice], part[p_container]="MED BOX")
+		lineageTag: 594267e9-fede-459e-935e-e4c38dbc3ca2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice19 = CALCULATE([_SumTotalPrice], part[p_container]="MED CAN")
+		lineageTag: 193d0f58-5c44-4d78-a21c-4a0ff5c66b18
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure _TotalPrice20 = CALCULATE([_SumTotalPrice], part[p_container]="MED CASE")
+		lineageTag: 6498fd7c-8d1a-47cb-9087-6d3d5aec5538
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Value
+		formatString: 0
+		lineageTag: 96996b20-7f96-4876-a553-584e6f2308d8
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MeasuresTable-26c28646-d65c-4bee-b0cf-d100487ebad2 = calculated
+		mode: import
+		source = {BLANK()}
+
+	annotation PBI_Id = de631cc3c2bb4f13be018e4fb25c43d8
+

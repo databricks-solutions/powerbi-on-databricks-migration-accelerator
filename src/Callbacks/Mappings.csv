@@ -1,0 +1,2 @@
+SourceSchema|SourceTable|TargetSchema|TargetTable
+dbo|DimAccount|dbo_new|DimAccount_new

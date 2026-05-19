@@ -1,0 +1,130 @@
+{
+    "$schema":              "../Configuration.schema.json",
+    "Backup":               false,
+    "RefreshAfterUpdate":   false,
+
+    "Properties": {
+        "CompatibilityLevel":              1569,
+        "MaxParallelismPerQuery":          11,
+        "DataSourceDefaultMaxConnections": 20
+    }, 
+
+    "Parameterize": true,
+    "Parameters": [
+        {
+            "Name" : "ServerHostname",
+            "Value": "adb-2219810816778143.3.azuredatabricks.net",
+            "Type":  "Text"
+        },
+        {
+            "Name" : "HTTPPath",
+            "Value": "/sql/1.0/warehouses/a5ad4687dadae274",
+            "Type":  "Text"
+        },
+        {
+            "Name" : "Catalog",
+            "Value": "tpch",
+            "Type":  "Text"
+        },
+        {
+            "Name" : "Schema",
+            "Value": "sf1",
+            "Type":  "Text"
+        }
+    ],
+
+    "Updates": [
+        {
+            "Name":           "SqlServer to Databricks - replace source (parameterize connection)",
+            "Enabled":        true,
+            "Order":          50,
+            "SearchPattern": "(?<Start>[\\s]+)(?<Var1>[^\\s]+)(?<Part1>[\\s]*=[\\s]*)(?<SqlServer>Sql\\.Database)(?<Part2>[\\s]*\\([\\s]*)(?<ServerHostname>\\\"[^\\\"]+\\\")(?<Part3>[\\s]*\\,[\\s]*)(?<Database>\\\"[^\\\"]+\\\")(?<ExtProperties>[\\s]*\\,[\\s]*\\[[^\\]]*\\])?(?<Part4>[\\s]*\\)[\\s]*\\,[\\s]*)(?<Var2>[^\\s=]+)(?<Part5>[\\s]*=[\\s]*)(?<Var3>[^\\s=]+)(?<Part6>[\\s]*\\{[\\s]*\\[[\\s]*Schema[\\s]*=[\\s]*)(?<SchemaName>\\\"[^\\\"]+\\\")(?<Part7>[\\s]*\\,[\\s]*Item[\\s]*=[\\s]*)(?<TableName>\\\"[^\\\"]+\\\")",
+            "ReplacePattern": "${Start}${Var1}${Part1}Databricks.Catalogs${Part2}ServerHostname${Part3}HTTPPath${Part4}databricks_Database = Source{[Name=Catalog,Kind=\"Database\"]}[Data],\r\n    databricks_Schema = databricks_Database{[Name=Schema,Kind=\"Schema\"]}[Data],\r\n    ${Var2}${Part5}databricks_Schema{[Name=${TableName},Kind=\"Table\""
+        },
+        {
+            "Name":           "SqlServer to Databricks - replace source (keep schema name untouched)",
+            "Enabled":        false,
+            "Order":          10,
+            "SearchPattern":  "(?<Start>[\\s]+)(?<Var1>[^\\s]+)(?<Part1>[\\s]*=[\\s]*)(?<SqlServer>Sql\\.Database)(?<Part2>[\\s]*\\([\\s]*)(?<ServerHostname>\\\"[^\\\"]+\\\")(?<Part3>[\\s]*\\,[\\s]*)(?<Database>\\\"[^\\\"]+\\\")(?<ExtProperties>[\\s]*\\,[\\s]*\\[[^\\]]*\\])?(?<Part4>[\\s]*\\)[\\s]*\\,[\\s]*)(?<Var2>[^\\s=]+)(?<Part5>[\\s]*=[\\s]*)(?<Var3>[^\\s=]+)(?<Part6>[\\s]*\\{[\\s]*\\[[\\s]*Schema[\\s]*=[\\s]*)(?<SchemaName>\\\"[^\\\"]+\\\")(?<Part7>[\\s]*\\,[\\s]*Item[\\s]*=[\\s]*)(?<TableName>\\\"[^\\\"]+\\\")",
+            "ReplacePattern": "${Start}${Var1}${Part1}Databricks.Catalogs${Part2}ServerHostname${Part3}HTTPPath${Part4}databricks_Database = Source{[Name=Catalog,Kind=\"Database\"]}[Data],\r\n    databricks_Schema = databricks_Database{[Name=${SchemaName},Kind=\"Schema\"]}[Data],\r\n    ${Var2}${Part5}databricks_Schema{[Name=${TableName},Kind=\"Table\""
+        },
+        {
+            "Name":           "SqlServer to Databricks - replace source (replace schema name with a new name)",
+            "Enabled":        false,
+            "Order":          5,
+            "SearchPattern":  "(?<Start>[\\s]+)(?<Var1>[^\\s]+)(?<Part1>[\\s]*=[\\s]*)(?<SqlServer>Sql\\.Database)(?<Part2>[\\s]*\\([\\s]*)(?<ServerHostname>\\\"[^\\\"]+\\\")(?<Part3>[\\s]*\\,[\\s]*)(?<Database>\\\"[^\\\"]+\\\")(?<ExtProperties>[\\s]*\\,[\\s]*\\[[^\\]]*\\])?(?<Part4>[\\s]*\\)[\\s]*\\,[\\s]*)(?<Var2>[^\\s=]+)(?<Part5>[\\s]*=[\\s]*)(?<Var3>[^\\s=]+)(?<Part6>[\\s]*\\{[\\s]*\\[[\\s]*Schema[\\s]*=[\\s]*)(?<SchemaName>\\\"dbo\\\")(?<Part7>[\\s]*\\,[\\s]*Item[\\s]*=[\\s]*)(?<TableName>\\\"[^\\\"]+\\\")",
+            "ReplacePattern": "${Start}${Var1}${Part1}Databricks.Catalogs${Part2}ServerHostname${Part3}HTTPPath${Part4}databricks_Database = Source{[Name=Catalog,Kind=\"Database\"]}[Data],\r\n    databricks_Schema = databricks_Database{[Name=\"sf10\",Kind=\"Schema\"]}[Data],\r\n    ${Var2}${Part5}databricks_Schema{[Name=${TableName},Kind=\"Table\""
+        },
+        {
+            "Name":           "SqlServer to Databricks - replace source (replace schema/table names with new names)",
+            "Enabled":        false,
+            "Order":          1,
+            "SearchPattern":  "(?<Start>[\\s]+)(?<Var1>[^\\s]+)(?<Part1>[\\s]*=[\\s]*)(?<SqlServer>Sql\\.Database)(?<Part2>[\\s]*\\([\\s]*)(?<ServerHostname>\\\"[^\\\"]+\\\")(?<Part3>[\\s]*\\,[\\s]*)(?<Database>\\\"[^\\\"]+\\\")(?<ExtProperties>[\\s]*\\,[\\s]*\\[[^\\]]*\\])?(?<Part4>[\\s]*\\)[\\s]*\\,[\\s]*)(?<Var2>[^\\s=]+)(?<Part5>[\\s]*=[\\s]*)(?<Var3>[^\\s=]+)(?<Part6>[\\s]*\\{[\\s]*\\[[\\s]*Schema[\\s]*=[\\s]*)(?<SchemaName>\\\"dbo\\\")(?<Part7>[\\s]*\\,[\\s]*Item[\\s]*=[\\s]*)(?<TableName>\\\"customer\\\")",
+            "ReplacePattern": "${Start}${Var1}${Part1}Databricks.Catalogs${Part2}ServerHostname${Part3}HTTPPath${Part4}databricks_Database = Source{[Name=Catalog,Kind=\"Database\"]}[Data],\r\n    databricks_Schema = databricks_Database{[Name=\"sf1\",Kind=\"Schema\"]}[Data],\r\n    ${Var2}${Part5}databricks_Schema{[Name=\"customer\",Kind=\"Table\""
+        },
+        {
+            "Name":           "SqlServer to Databricks - replace Native Queries",
+            "Enabled":        true,
+            "Order":          100,
+            "SearchPattern":  "(?<Start>[\\s]+)(?<Var1>[^\\s]+)(?<Part1>[\\s]*=[\\s]*)(?<SqlServer>Sql\\.Database)(?<Part2>[\\s]*\\([\\s]*)(?<ServerHostname>\\\"[^\\\"]+\\\")(?<Part3>[\\s]*\\,[\\s]*)(?<Database>\\\"[^\\\"]+\\\")(?<ExtProperties>[\\s]*\\,[\\s]*\\[[\\s]*[^]]*Query[\\s]*=[\\s]*(?<NativeQuery>\\\"[^\\\"]+\\\")[^]]*\\])(?<Part4>[\\s]*\\)[\\s]*)",
+            "ReplacePattern": "${Start}${Var1}${Part1}Value.NativeQuery(Databricks.Catalogs${Part2}ServerHostname${Part3}HTTPPath, [Catalog=Catalog, Database=null]){[Name=Catalog,Kind=\"Database\"]}[Data], ${NativeQuery}, null, [EnableFolding=true]${Part4}"
+        },
+        {
+            "Name":           "SqlServer to Databricks - replace table name (lower case)",
+            "Enabled":        true,
+            "Order":          1000,
+            "SearchPattern":  "(?<Start>[\\s]*{[\\s]*\\[[\\s]*Name[\\s]*=[\\s]*)(?<Table>\"[^\\\"]+\")(?<Ending>[\\s]*,[\\s]*Kind[\\s]*=[\\s]*\"Table\")",
+            "ReplacePattern": null,
+            "Callback":       {
+                "Module":   "src/Callbacks/ConvertTo-LowerCaseTableName.psm1",
+                "Function": "ConvertTo-LowerCaseTableName"
+            }
+        },
+
+        {
+            "Name":           "Databricks - map schema/table names",
+            "Enabled":        false,
+            "Order":          999,
+            "SearchPattern2": "(?<Var1>[^\\s]+)[\\s]* = [\\s]* (?<Var2>[^\\s]+) (?<Start1>[\\s]*{[\\s]*\\[[\\s]*Name[\\s]*=[\\s]*)(?<Schema>\"[^\\\"]+\")(?<Ending1>[\\s]*,[\\s]*Kind[\\s]*=[\\s]*\"Schema\")\\]}\\[Data\\],[\\s]*(?<Var3>[^\\s]+)=[\\s]*(?<Var4>[^\\s]+) (?<Start2>[\\s]*{[\\s]*\\[[\\s]*Name[\\s]*=[\\s]*)(?<Table>\"[^\\\"]+\")(?<Ending2>[\\s]*,[\\s]*Kind[\\s]*=[\\s]*\"Table\")",
+            "SearchPattern":  "(?<Var1>[^\\s=]+|#\\\"[^\\\"]+\\\")[\\s]*=[\\s]*(?<Var2>[^\\s=]+|#\\\"[^\\\"]+\\\")(?<Start1>[\\s]*{[\\s]*\\[[\\s]*Name[\\s]*=[\\s]*)\"(?<Schema>[^\\\"]+)\"(?<Ending1>[\\s]*,[\\s]*Kind[\\s]*=[\\s]*\"Schema\")\\]}\\[Data\\],[\\s]*(?<Var3>[^\\s=]+|#\\\"[^\\\"]+\\\")[\\s]*=[\\s]*(?<Var4>[^\\s=]+|#\\\"[^\\\"]+\\\")(?<Start2>[\\s]*{[\\s]*\\[[\\s]*Name[\\s]*=[\\s]*)\"(?<Table>[^\\\"]+)\"(?<Ending2>[\\s]*,[\\s]*Kind[\\s]*=[\\s]*\"Table\")",
+            "ReplacePattern": null,
+            "Callback":       {
+                "Module":   "src/Callbacks/Resolve-TableNameMapping.psm1",
+                "Function": "Resolve-TableNameMapping"
+            }
+        }
+    ],
+
+
+    "Folders":
+    [
+        {
+            "Path":                 "./_demo",
+            "IncludeAll":           false,
+
+            "RefreshAfterUpdate":   null,
+            "Properties":           {}, 
+
+            "Parameterize":         null,
+            "Parameters":           null,
+            
+            "Datasets": [
+                {
+                    "Name":         "SqlServer",
+                    "Skip":         false,
+                    "Properties":   {},
+
+                    "Parameterize": null,
+                    "Parameters":   null,
+
+                    "Updates":      null
+                }
+            ]
+        }
+    ],
+
+    "Workspaces":
+    [
+        
+    ]
+}

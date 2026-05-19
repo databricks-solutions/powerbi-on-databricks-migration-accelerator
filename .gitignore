@@ -1,5 +1,11 @@
-*conf*.json
-.DS_Store
-__pycache__
-.idea/
-.env
+.libraries
+Microsoft.AnalysisServices.**/*
+Microsoft.PowerBI.Api.**/*
+.vscode/*
+
+
+_*.*
+**/*.zip
+**/*.log
+_*/*.*
+

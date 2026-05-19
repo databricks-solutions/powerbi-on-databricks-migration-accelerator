@@ -1,0 +1,44 @@
+table region
+	lineageTag: c9697af8-8120-452b-86fe-d30eb38b5205
+
+	column R_REGIONKEY
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: fa74b47b-ae08-40cd-b240-a85b3540b50b
+		summarizeBy: none
+		sourceColumn: R_REGIONKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column R_NAME
+		dataType: string
+		isNullable: false
+		sourceProviderType: char
+		lineageTag: dc38a410-b73e-4094-8b9f-36a7420b697e
+		summarizeBy: none
+		sourceColumn: R_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column R_COMMENT
+		dataType: string
+		sourceProviderType: varchar(152)
+		lineageTag: 194d86e1-da90-4b80-be41-b4cd27dcc367
+		summarizeBy: none
+		sourceColumn: R_COMMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition region = m
+		mode: dual
+		source =
+				let
+				    Source = Sql.Database("synapse-migration-demo.sql.azuresynapse.net", "tpch"),
+				    dbo_REGION = Source{[Schema="dbo",Item="REGION"]}[Data]
+				in
+				    dbo_REGION
+
+	annotation PBI_ResultType = Table
+

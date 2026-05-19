@@ -1,0 +1,42 @@
+{
+  "config": "{\"version\":\"5.66\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY22SU11\",\"type\":2,\"version\":{\"visual\":\"1.8.76\",\"report\":\"2.0.76\",\"page\":\"1.3.76\"}}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"slowDataSourceSettings\":{\"isCrossHighlightingDisabled\":false,\"isSlicerSelectionsButtonEnabled\":false,\"isFilterSelectionsButtonEnabled\":false,\"isFieldWellButtonEnabled\":false,\"isApplyAllButtonEnabled\":false},\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY22SU11",
+            "path": "BaseThemes/CY22SU11.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{}",
+      "displayName": "tpch",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSection438a6bc3ca021802a893",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"d8c6d77874e03601253a\",\"layouts\":[{\"id\":0,\"position\":{\"x\":10.616113744075829,\"y\":1.5165876777251184,\"z\":0,\"width\":1269.3838862559242,\"height\":718.8625592417061}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"region.R_NAME\"},{\"queryRef\":\"MeasuresTable._TotalPrice1\"},{\"queryRef\":\"MeasuresTable._TotalPrice7\"},{\"queryRef\":\"MeasuresTable._TotalPrice03\"},{\"queryRef\":\"MeasuresTable._TotalPrice04\"},{\"queryRef\":\"MeasuresTable._TotalPrice05\"},{\"queryRef\":\"MeasuresTable._TotalPrice06\"},{\"queryRef\":\"MeasuresTable._TotalPrice07\"},{\"queryRef\":\"MeasuresTable._TotalPrice08\"},{\"queryRef\":\"MeasuresTable._TotalPrice09\"},{\"queryRef\":\"MeasuresTable._TotalPrice10\"},{\"queryRef\":\"MeasuresTable._TotalPrice11\"},{\"queryRef\":\"MeasuresTable._TotalPrice12\"},{\"queryRef\":\"MeasuresTable._TotalPrice13\"},{\"queryRef\":\"MeasuresTable._TotalPrice14\"},{\"queryRef\":\"MeasuresTable._TotalPrice15\"},{\"queryRef\":\"MeasuresTable._TotalPrice16\"},{\"queryRef\":\"MeasuresTable._TotalPrice17\"},{\"queryRef\":\"MeasuresTable._TotalPrice18\"},{\"queryRef\":\"MeasuresTable._TotalPrice19\"},{\"queryRef\":\"MeasuresTable._TotalPrice20\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\"MeasuresTable\",\"Type\":0},{\"Name\":\"r\",\"Entity\":\"region\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice01\"},\"Name\":\"MeasuresTable._TotalPrice1\",\"NativeReferenceName\":\"_TotalPrice01\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice02\"},\"Name\":\"MeasuresTable._TotalPrice7\",\"NativeReferenceName\":\"_TotalPrice02\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice03\"},\"Name\":\"MeasuresTable._TotalPrice03\",\"NativeReferenceName\":\"_TotalPrice03\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice04\"},\"Name\":\"MeasuresTable._TotalPrice04\",\"NativeReferenceName\":\"_TotalPrice04\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice05\"},\"Name\":\"MeasuresTable._TotalPrice05\",\"NativeReferenceName\":\"_TotalPrice05\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice06\"},\"Name\":\"MeasuresTable._TotalPrice06\",\"NativeReferenceName\":\"_TotalPrice06\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice07\"},\"Name\":\"MeasuresTable._TotalPrice07\",\"NativeReferenceName\":\"_TotalPrice07\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice08\"},\"Name\":\"MeasuresTable._TotalPrice08\",\"NativeReferenceName\":\"_TotalPrice08\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice09\"},\"Name\":\"MeasuresTable._TotalPrice09\",\"NativeReferenceName\":\"_TotalPrice09\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice10\"},\"Name\":\"MeasuresTable._TotalPrice10\",\"NativeReferenceName\":\"_TotalPrice10\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice11\"},\"Name\":\"MeasuresTable._TotalPrice11\",\"NativeReferenceName\":\"_TotalPrice11\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice12\"},\"Name\":\"MeasuresTable._TotalPrice12\",\"NativeReferenceName\":\"_TotalPrice12\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice13\"},\"Name\":\"MeasuresTable._TotalPrice13\",\"NativeReferenceName\":\"_TotalPrice13\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice14\"},\"Name\":\"MeasuresTable._TotalPrice14\",\"NativeReferenceName\":\"_TotalPrice14\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice15\"},\"Name\":\"MeasuresTable._TotalPrice15\",\"NativeReferenceName\":\"_TotalPrice15\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice16\"},\"Name\":\"MeasuresTable._TotalPrice16\",\"NativeReferenceName\":\"_TotalPrice16\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice17\"},\"Name\":\"MeasuresTable._TotalPrice17\",\"NativeReferenceName\":\"_TotalPrice17\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice18\"},\"Name\":\"MeasuresTable._TotalPrice18\",\"NativeReferenceName\":\"_TotalPrice18\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice19\"},\"Name\":\"MeasuresTable._TotalPrice19\",\"NativeReferenceName\":\"_TotalPrice19\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"_TotalPrice20\"},\"Name\":\"MeasuresTable._TotalPrice20\",\"NativeReferenceName\":\"_TotalPrice20\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"R_NAME\"},\"Name\":\"region.R_NAME\",\"NativeReferenceName\":\"R_NAME\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"values\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}},\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'''Segoe UI'', wf_segoe-ui_normal, helvetica, arial, sans-serif'\"}}},\"wordWrap\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"columnHeaders\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"8D\"}}}}}],\"total\":[{\"properties\":{\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"totals\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 718.86,
+          "width": 1269.38,
+          "x": 10.62,
+          "y": 1.52,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ]
+}
