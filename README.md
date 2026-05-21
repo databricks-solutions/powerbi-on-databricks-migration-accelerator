@@ -199,7 +199,8 @@ This repository is maintained by Databricks; external pull requests are not curr
 
 - Bug reports & feature requests: [open a GitHub issue](https://github.com/databricks-solutions/powerbi-on-databricks-migration-accelerator/issues/new/choose)
 - Security disclosures: see [SECURITY.md](./SECURITY.md)
-- CI runs PSScriptAnalyzer + Pester via [.github/workflows/ci.yml](./.github/workflows/ci.yml); the release history lives in [CHANGELOG.md](./CHANGELOG.md)
+- CI runs PSScriptAnalyzer + Pester via [.github/workflows/ci.yml](./.github/workflows/ci.yml)
+- the release history lives in [CHANGELOG.md](./CHANGELOG.md)
 
 
 ## Support
