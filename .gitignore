@@ -9,3 +9,6 @@ _*.*
 **/*.log
 _*/*.*
 
+samples-pbix/**
+
+SUPPLY_CHAIN_SECURITY_ANALYSIS.md

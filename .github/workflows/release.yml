@@ -3,7 +3,7 @@ name: Release
 # Triggers when a tag v* is created on main
 on:
   push:
-    branches: [ "main" ]
+    #branches: [ "main" ]
     tags:
       - "v*"
 
@@ -11,27 +11,24 @@ on:
   workflow_dispatch:
 
 
-permissions:
-  contents: write
-
 jobs:
   build:
     runs-on:
       group: databricks-protected-runner-group
       labels: linux-ubuntu-latest
 
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout
         #uses: actions/checkout@v6
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd #v6 (pin)
                 
-      - name: Archive files
-        #uses: thedoctor0/zip-release@0.7.5
-        uses: thedoctor0/zip-release@7fddfdd07cadb5b8c6c0dbcdcec17f8cd7784b80 # 0.7.5 (pin)
-        with:
-          type: 'zip'
-          filename: "powerbi-on-databricks-migration-accelerator-${{ github.ref_name }}.zip"
-          exclusions: '*.git* .editorconfig .git/**'
+      - name: Zip files
+        shell: bash
+        run: |
+          zip -r powerbi-on-databricks-migration-accelerator-${{ github.ref_name }}.zip . -x "*.git*" -x ".editorconfig" -x "*/.git/*"
 
       - name: Create release
         #uses: softprops/action-gh-release@v3
