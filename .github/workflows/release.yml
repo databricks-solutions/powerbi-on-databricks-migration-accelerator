@@ -7,25 +7,35 @@ on:
     tags:
       - "v*"
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+
 permissions:
   contents: write
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on:
+      group: databricks-protected-runner-group
+      labels: linux-ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-
+      - name: Checkout
+        #uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd #v6 (pin)
+                
       - name: Archive files
-        uses: thedoctor0/zip-release@0.7.5
+        #uses: thedoctor0/zip-release@0.7.5
+        uses: thedoctor0/zip-release@7fddfdd07cadb5b8c6c0dbcdcec17f8cd7784b80 # 0.7.5 (pin)
         with:
           type: 'zip'
           filename: "powerbi-on-databricks-migration-accelerator-${{ github.ref_name }}.zip"
-          exclusions: '*.git* /*node_modules/* .editorconfig .git/**'
+          exclusions: '*.git* .editorconfig .git/**'
 
       - name: Create release
-        uses: softprops/action-gh-release@v2
+        #uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda  # v3 (pin)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
