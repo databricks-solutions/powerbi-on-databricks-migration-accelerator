@@ -25,10 +25,18 @@ jobs:
         #uses: actions/checkout@v6
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd #v6 (pin)
                 
-      - name: Zip files
-        shell: bash
-        run: |
-          zip -r powerbi-on-databricks-migration-accelerator-${{ github.ref_name }}.zip . -x "*.git*" -x ".editorconfig" -x "*/.git/*"
+      #- name: Archive files
+      #  #uses: thedoctor0/zip-release@0.7.5
+      #  uses: thedoctor0/zip-release@7fddfdd07cadb5b8c6c0dbcdcec17f8cd7784b80 # 0.7.5 (pin)
+      #  with:
+      #    type: 'zip'
+      #    filename: "powerbi-on-databricks-migration-accelerator-${{ github.ref_name }}.zip"
+      #    exclusions: '*.git* .editorconfig .git/**'
+
+      #- name: Archive files
+      #  shell: bash
+      #  run: |
+      #    zip -r powerbi-on-databricks-migration-accelerator-${{ github.ref_name }}.zip . -x "*.git*" -x ".editorconfig" -x "*/.git/*"
 
       - name: Create release
         #uses: softprops/action-gh-release@v3
@@ -42,27 +50,5 @@ jobs:
           draft: false
           prerelease: false
           make_latest: true
-          files: |
-            powerbi-on-databricks-migration-accelerator-${{ github.ref_name }}.zip
-            
-      # - name: Create release
-      #   id: create_release
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     tag_name: ${{ github.ref_name }}
-      #     release_name: ${{ github.ref_name }}
-      #     draft: true
-      #     prerelease: true
-      #     body: "Release ${{ github.ref_name }}"
-          
-      # - name: Upload release asset
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: "powerbi-on-databricks-migration-accelerator-${{ github.ref_name }}.zip"
-      #     asset_name: "powerbi-migration-accelerator-${{ github.ref_name }}.zip"
-      #     asset_content_type: application/zip
+          #files: |
+          #  powerbi-on-databricks-migration-accelerator-${{ github.ref_name }}.zip

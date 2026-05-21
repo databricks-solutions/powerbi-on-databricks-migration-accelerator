@@ -32,7 +32,7 @@ This repository is maintained by Databricks and intended for contributions from 
 Install the tooling once:
 
 ```powershell
-Install-Module -Name Pester -RequiredVersion 5.5.0 -Scope CurrentUser -Force -SkipPublisherCheck
+Install-Module -Name Pester -RequiredVersion 5.5.0 -Scope CurrentUser -Force
 Install-Module -Name PSScriptAnalyzer -RequiredVersion 1.22.0 -Scope CurrentUser -Force
 ```
 
