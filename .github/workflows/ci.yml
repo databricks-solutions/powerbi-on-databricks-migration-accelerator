@@ -15,6 +15,7 @@ jobs:
   lint-and-test:
     name: PSScriptAnalyzer + Pester
 
+    #runs-on: ubuntu-latest
     runs-on:
       group: databricks-protected-runner-group
       labels: linux-ubuntu-latest
@@ -67,4 +68,3 @@ jobs:
         with:
           name: pester-results
           path: testResults.xml
-
