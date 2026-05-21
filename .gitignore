@@ -2,7 +2,8 @@
 Microsoft.AnalysisServices.**/*
 Microsoft.PowerBI.Api.**/*
 .vscode/*
-
+.github/.DS_Store
+.DS_Store
 
 _*.*
 **/*.zip

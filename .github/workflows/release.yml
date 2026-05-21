@@ -24,14 +24,6 @@ jobs:
       - name: Checkout
         #uses: actions/checkout@v6
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd #v6 (pin)
-                
-      #- name: Archive files
-      #  #uses: thedoctor0/zip-release@0.7.5
-      #  uses: thedoctor0/zip-release@7fddfdd07cadb5b8c6c0dbcdcec17f8cd7784b80 # 0.7.5 (pin)
-      #  with:
-      #    type: 'zip'
-      #    filename: "powerbi-on-databricks-migration-accelerator-${{ github.ref_name }}.zip"
-      #    exclusions: '*.git* .editorconfig .git/**'
 
       #- name: Archive files
       #  shell: bash
