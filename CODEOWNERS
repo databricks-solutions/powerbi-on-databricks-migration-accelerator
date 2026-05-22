@@ -7,7 +7,7 @@
 * @AMirskiy
 
 # Owners for the .github directory (workflows, issue templates, etc.)
-/.github @AMirskiy
+/.github @AMirskiy @mhmdburton1990
 
 # Owners for the source code
 /src @AMirskiy @mhmdburton1990
