@@ -13,10 +13,10 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    #runs-on:
-    #  group: databricks-protected-runner-group
-    #  labels: linux-ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on:
+      group: databricks-protected-runner-group
+      labels: linux-ubuntu-latest
 
     permissions:
       contents: write

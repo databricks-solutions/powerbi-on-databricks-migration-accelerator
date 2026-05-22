@@ -15,10 +15,10 @@ jobs:
   lint-and-test:
     name: PSScriptAnalyzer + Pester
 
-    runs-on: ubuntu-latest
-    #runs-on:
-    #  group: databricks-protected-runner-group
-    #  labels: linux-ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on:
+      group: databricks-protected-runner-group
+      labels: linux-ubuntu-latest
 
     steps:
       - name: Checkout
