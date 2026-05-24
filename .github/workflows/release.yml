@@ -30,5 +30,6 @@ jobs:
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release create "${{ github.ref_name }}" --generate-notes --latest
+          REF_NAME: ${{ github.ref_name }}
+        run: gh release create "$REF_NAME" --generate-notes --latest
           #--draft false --prerelease false --make-latest true
