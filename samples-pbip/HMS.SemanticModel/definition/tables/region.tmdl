@@ -1,0 +1,46 @@
+table region
+	lineageTag: c9697af8-8120-452b-86fe-d30eb38b5205
+
+	column R_REGIONKEY
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 9ca6a51a-a8cc-4f92-9c5e-19b7ea28d62b
+		summarizeBy: none
+		sourceColumn: R_REGIONKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column R_NAME
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 4de4d5b7-b3db-4974-962a-7bef1c339017
+		summarizeBy: none
+		sourceColumn: R_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column R_COMMENT
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 63ff5dae-5f3c-4469-a0c9-4934245c1e0b
+		summarizeBy: none
+		sourceColumn: R_COMMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition region = m
+		mode: dual
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-2219810816778143.3.azuredatabricks.net", "/sql/1.0/warehouses/6fdebb669d2772a3", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    samples_Database = Source{[Name="hive_metastore",Kind="Database"]}[Data],
+				    tpch_Schema = samples_Database{[Name="tpch_sf1_delta_nopartitions",Kind="Schema"]}[Data],
+				    region_Table = tpch_Schema{[Name="region",Kind="Table"]}[Data]
+				in
+				    region_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

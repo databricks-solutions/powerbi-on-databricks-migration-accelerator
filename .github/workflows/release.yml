@@ -1,0 +1,48 @@
+name: Release
+
+# Triggers when a tag v* is created on main
+on:
+  push:
+    #branches: [ "main" ]
+    tags:
+      - "v*"
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  build:
+    #runs-on: ubuntu-latest
+    runs-on:
+      group: databricks-solutions-protected-runner-group
+      labels: linux-ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        #uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+
+      #- name: Archive files
+      #  shell: bash
+      #  run: |
+      #    zip -r powerbi-on-databricks-migration-accelerator-${{ github.ref_name }}.zip . -x "*.git*" -x ".editorconfig" -x "*/.git/*"
+
+      - name: Create release
+        #uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+          make_latest: true
+          #files: |
+          #  powerbi-on-databricks-migration-accelerator-${{ github.ref_name }}.zip

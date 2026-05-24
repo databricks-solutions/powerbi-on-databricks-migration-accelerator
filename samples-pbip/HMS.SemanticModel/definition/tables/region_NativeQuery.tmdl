@@ -1,0 +1,44 @@
+table region_NativeQuery
+	lineageTag: 9c6b102b-26b3-44fc-b139-0befb8e26d6e
+
+	column R_REGIONKEY
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 14c06f69-9222-4de5-8133-82398ada5dfc
+		summarizeBy: sum
+		sourceColumn: R_REGIONKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column R_NAME
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: f3fea76e-7847-46d1-aaca-2a117e594f03
+		summarizeBy: none
+		sourceColumn: R_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column R_COMMENT
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 17249ef8-c64d-4e4e-9a09-ffeaf3df468b
+		summarizeBy: none
+		sourceColumn: R_COMMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition region_NativeQuery = m
+		mode: directQuery
+		source =
+				let
+				    Source = Value.NativeQuery(Databricks.Catalogs("adb-2219810816778143.3.azuredatabricks.net", "/sql/1.0/warehouses/6fdebb669d2772a3",
+				        [Catalog="hive_metastore", Database=null, EnableAutomaticProxyDiscovery=null]){[Name="hive_metastore",Kind="Database"]}[Data], "select * from tpch_sf1_delta_nopartitions.region", null, [EnableFolding=true])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

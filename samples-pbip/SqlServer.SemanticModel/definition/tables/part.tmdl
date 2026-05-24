@@ -1,0 +1,110 @@
+table part
+	lineageTag: 8d06cd6d-c852-4e60-8d4d-c749d0a72550
+
+	column P_PARTKEY
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2ccdd2ec-5d4f-4cf6-8353-91c83784d825
+		summarizeBy: none
+		sourceColumn: P_PARTKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column P_NAME
+		dataType: string
+		isNullable: false
+		sourceProviderType: varchar(55)
+		lineageTag: 52fd0f2f-c57c-44eb-ae3d-c2620b4f32bc
+		summarizeBy: none
+		sourceColumn: P_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column P_MFGR
+		dataType: string
+		isNullable: false
+		sourceProviderType: char
+		lineageTag: 57f6a580-dd9f-48cd-872a-1b7c833a2975
+		summarizeBy: none
+		sourceColumn: P_MFGR
+
+		annotation SummarizationSetBy = Automatic
+
+	column P_BRAND
+		dataType: string
+		isNullable: false
+		sourceProviderType: char
+		lineageTag: e3668e41-cb19-40ee-97bd-f2d4c04e2ef2
+		summarizeBy: none
+		sourceColumn: P_BRAND
+
+		annotation SummarizationSetBy = Automatic
+
+	column P_TYPE
+		dataType: string
+		isNullable: false
+		sourceProviderType: varchar(25)
+		lineageTag: 2db83c7d-0902-4cbc-9dfb-b27d687df4b4
+		summarizeBy: none
+		sourceColumn: P_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column P_SIZE
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 08778121-9cdd-4000-87fd-9546bdc50a2b
+		summarizeBy: none
+		sourceColumn: P_SIZE
+
+		annotation SummarizationSetBy = Automatic
+
+	column P_CONTAINER
+		dataType: string
+		isNullable: false
+		sourceProviderType: char
+		lineageTag: 9304b08a-05ad-41f2-ae90-36b75d2cb61b
+		summarizeBy: none
+		sourceColumn: P_CONTAINER
+
+		annotation SummarizationSetBy = Automatic
+
+	column P_RETAILPRICE
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(15, 2)
+		lineageTag: 3474f658-25f0-4546-8fca-d4c5686832c4
+		summarizeBy: none
+		sourceColumn: P_RETAILPRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column P_COMMENT
+		dataType: string
+		isNullable: false
+		sourceProviderType: varchar(23)
+		lineageTag: f09c9979-cea6-440e-b2aa-2ea56ce17ff3
+		summarizeBy: none
+		sourceColumn: P_COMMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition part = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("synapse-migration-demo.sql.azuresynapse.net", "tpch"),
+				    dbo_PART = Source{[Schema="dbo",Item="PART"]}[Data]
+				in
+				    dbo_PART
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

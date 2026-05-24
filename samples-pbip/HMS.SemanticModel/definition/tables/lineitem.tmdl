@@ -1,0 +1,183 @@
+table lineitem
+	lineageTag: bc80b9d2-9688-4084-95f4-3d3cf92e3232
+
+	column L_ORDERKEY
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 2c59cdb9-f93e-4c42-9cf6-bbb06bfff27a
+		summarizeBy: none
+		sourceColumn: L_ORDERKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_PARTKEY
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 0e95e43a-0148-4086-ba5e-5a7fab413512
+		summarizeBy: none
+		sourceColumn: L_PARTKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_SUPPKEY
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 28db906c-0ffc-46a6-aa9d-4f01fa86914b
+		summarizeBy: sum
+		sourceColumn: L_SUPPKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_LINENUMBER
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 5fd9fdbd-e56f-4084-b9c3-339665585853
+		summarizeBy: sum
+		sourceColumn: L_LINENUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_QUANTITY
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: 55b92969-8662-4512-9b1b-ebe501dd4924
+		summarizeBy: sum
+		sourceColumn: L_QUANTITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column L_EXTENDEDPRICE
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: 2fa7d082-ce8f-47af-9296-ac5c011a3a9f
+		summarizeBy: sum
+		sourceColumn: L_EXTENDEDPRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column L_DISCOUNT
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: e9d10504-0358-4cff-814a-cfcdb416b744
+		summarizeBy: sum
+		sourceColumn: L_DISCOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column L_TAX
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: 42c3ff4a-d8a5-4627-8388-b505e73a7dec
+		summarizeBy: sum
+		sourceColumn: L_TAX
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column L_RETURNFLAG
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 43681d03-f8ac-41ae-bbeb-4dedb3978416
+		summarizeBy: none
+		sourceColumn: L_RETURNFLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_LINESTATUS
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: c3d39ccb-1617-4fb7-9d61-4c37a3882625
+		summarizeBy: none
+		sourceColumn: L_LINESTATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_SHIPDATE
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 09b651da-91ac-43f4-af1d-8f6eedbfbdf1
+		summarizeBy: none
+		sourceColumn: L_SHIPDATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column L_COMMITDATE
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 16f19743-d7d4-41b0-be08-7f62f7fdf2b8
+		summarizeBy: none
+		sourceColumn: L_COMMITDATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column L_RECEIPTDATE
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 1847e8d1-16bd-4eb0-844d-f4e3d0fe92b3
+		summarizeBy: none
+		sourceColumn: L_RECEIPTDATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column L_SHIPINSTRUCT
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: db12aeea-de2e-42f4-b801-486d7c08d299
+		summarizeBy: none
+		sourceColumn: L_SHIPINSTRUCT
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_SHIPMODE
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 89ce1706-a554-4cca-bb70-03e8cde59676
+		summarizeBy: none
+		sourceColumn: L_SHIPMODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column L_COMMENT
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: d417163b-e1dd-410f-94fd-487aa9aa93fc
+		summarizeBy: none
+		sourceColumn: L_COMMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition lineitem = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-2219810816778143.3.azuredatabricks.net", "/sql/1.0/warehouses/6fdebb669d2772a3", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    samples_Database = Source{[Name="hive_metastore",Kind="Database"]}[Data],
+				    tpch_Schema = samples_Database{[Name="tpch_sf1_delta_nopartitions",Kind="Schema"]}[Data],
+				    lineitem_Table = tpch_Schema{[Name="lineitem",Kind="Table"]}[Data]
+				in
+				    lineitem_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

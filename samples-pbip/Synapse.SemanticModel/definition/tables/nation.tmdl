@@ -1,0 +1,55 @@
+table nation
+	lineageTag: e144a950-66fe-401f-8938-ae096186d5fb
+
+	column N_NATIONKEY
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6520c46a-ae78-4ab6-84c5-2da24232cd92
+		summarizeBy: none
+		sourceColumn: N_NATIONKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column N_NAME
+		dataType: string
+		isNullable: false
+		sourceProviderType: char
+		lineageTag: 3ba10837-4478-47d2-b284-3c5c28bd9ad3
+		summarizeBy: none
+		sourceColumn: N_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column N_REGIONKEY
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 949a9c1f-7b5c-400f-a8a8-6f352dbeaeb0
+		summarizeBy: none
+		sourceColumn: N_REGIONKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column N_COMMENT
+		dataType: string
+		sourceProviderType: varchar(152)
+		lineageTag: 88593490-4e21-456e-bf95-1b8c70b24047
+		summarizeBy: none
+		sourceColumn: N_COMMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition nation = m
+		mode: dual
+		source =
+				let
+				    Source = Sql.Database("synapse-migration-demo.sql.azuresynapse.net", "tpch"),
+				    dbo_NATION = Source{[Schema="dbo",Item="NATION"]}[Data]
+				in
+				    dbo_NATION
+
+	annotation PBI_ResultType = Table
+

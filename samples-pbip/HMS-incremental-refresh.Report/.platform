@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "HMS-incremental-refresh"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "5ad80968-8051-4cbf-8905-a845f0b006e8"
+  }
+}

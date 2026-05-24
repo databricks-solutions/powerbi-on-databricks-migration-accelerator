@@ -1,0 +1,159 @@
+{
+    "$schema":              "../Configuration.schema.json",
+    "Backup":               false,
+    "RefreshAfterUpdate":   false,
+
+    "Properties": {
+        "CompatibilityLevel":              1569,
+        "MaxParallelismPerQuery":          11,
+        "DataSourceDefaultMaxConnections": 20
+    }, 
+
+    "Parameterize": true,
+    "Parameters": [
+        {
+            "Name" : "ServerHostname",
+            "Value": "adb-2219810816778143.3.azuredatabricks.net",
+            "Type":  "Text"
+        },
+        {
+            "Name" : "HTTPPath",
+            "Value": "/sql/1.0/warehouses/a5ad4687dadae274",
+            "Type":  "Text"
+        },
+        {
+            "Name" : "Catalog",
+            "Value": "tpch",
+            "Type":  "Text"
+        },
+        {
+            "Name" : "Schema",
+            "Value": "sf1",
+            "Type":  "Text"
+        }
+    ],
+
+    "Updates": [
+        {
+            "Name":           "HMS to UC - parameterize connection",
+            "Enabled":        true,
+            "Order":          1,
+            "SearchPattern":  "(?<Start>[\\s]+[^\\s]+[\\s]*=[\\s]*Databricks\\.Catalogs[\\s]*\\([\\s]*)(?<ServerHostname>\"[^\"]+\")(?<Between>[\\s]*\\,[\\s]*)(?<HTTPPath>\"[^\"]+\")",
+            "ReplacePattern": "${Start}ServerHostname${Between}HTTPPath"
+        },
+        {
+            "Name":           "HMS to UC - parameterize catalog \"hive_metastore\"",
+            "Enabled":        true,
+            "Order":          2,
+            "SearchPattern":  "(?<Start>=[\\s]*[^\\s]+[\\s]*{[\\s]*\\[[\\s]*Name[\\s]*=[\\s]*)(?<HMS>\"hive_metastore\")(?<Ending>[\\s]*,[\\s]*Kind[\\s]*=[\\s]*\"Database\")",
+            "ReplacePattern": "${Start}Catalog${Ending}"
+        },
+        {
+            "Name":           "HMS to UC - parameterize catalog \"SPARK\"",
+            "Enabled":        false,
+            "Order":          2,
+            "SearchPattern":  "(?<Start>=[\\s]*[^\\s]+[\\s]*{[\\s]*\\[[\\s]*Name[\\s]*=[\\s]*)(?<HMS>\"SPARK\")(?<Ending>[\\s]*,[\\s]*Kind[\\s]*=[\\s]*\"Database\")",
+            "ReplacePattern": "${Start}Catalog${Ending}"
+        },
+        {
+            "Name":           "HMS to UC - parameterize schema 1",
+            "Enabled":        true,
+            "Order":          3,
+            "SearchPattern":  "(?<Start>[\\s]*{[\\s]*\\[[\\s]*Name[\\s]*=[\\s]*)(?<Schema>\"tpch_sf1_delta_nopartitions\")(?<Ending>[\\s]*,[\\s]*Kind[\\s]*=[\\s]*\"Schema\")",
+            "ReplacePattern": "${Start}Schema${Ending}"
+        },
+        {
+            "Name":           "HMS to UC - parameterize catalog 2",
+            "Enabled":        true,
+            "Order":          4,
+            "SearchPattern":  "(?<Start>.+Databricks\\.Catalogs.+Catalog[\\s]*=[\\s]*)(?<Catalog>\"[^\"]+\")",
+            "ReplacePattern": "${Start}Catalog"
+        },
+        {
+            "Name":           "HMS to UC - parameterize catalog 3",
+            "Enabled":        true,
+            "Order":          4,
+            "SearchPattern":  "(?<Start>.+=.+Item[\\s]*=.+Catalog[\\s]*=[\\s]*)(?<Catalog>\"[^\"]+\")",
+            "ReplacePattern": "${Start}Catalog"
+        },
+        {
+            "Name":           "HMS to UC - parameterize schema 2",
+            "Enabled":        true,
+            "Order":          5,
+            "SearchPattern":  "(?<Start>.+Databricks\\.Catalogs.+Database[\\s]*=[\\s]*)(?<Schema>\"[^\"]+\")",
+            "ReplacePattern": "${Start}Schema"
+        },
+        {
+            "Name":           "HMS to UC - parameterize schema 3",
+            "Enabled":        true,
+            "Order":          5,
+            "SearchPattern":  "(?<Start>.+=.+Item[\\s]*=.+Schema[\\s]*=[\\s]*)(?<Schema>\"[^\"]+\")",
+            "ReplacePattern": "${Start}Schema"
+        },
+
+        {
+            "Name":           "HMS to UC - parameterize Native Queries",
+            "Enabled":        true,
+            "Order":          100,
+            "SearchPattern":  "(?<Start>[\\s]+[^\\s]+[\\s]*=[\\s]*Value.NativeQuery\\([\\s]*Databricks\\.Catalogs[\\s]*\\([\\s]*)(?<ServerHostname>\"[^\"]+\")(?<Between>[\\s]*\\,[\\s]*)(?<HTTPPath>\"[^\"]+\")",
+            "ReplacePattern": "${Start}ServerHostname${Between}HTTPPath"
+        },
+        {
+            "Name":           "HMS to UC - parameterize Native Queries catalog 1",
+            "Enabled":        true,
+            "Order":          1000,
+            "SearchPattern":  "(?<Start>Name[\\s]*=[\\s]*)(?<Catalog>\"hive_metastore\")(?<Ending>[\\s]*,[\\s]*Kind[\\s]*=[\\s]*\"Database\")",
+            "ReplacePattern": "${Start}Catalog${Ending}"
+        },
+        {
+            "Name":           "HMS to UC - parameterize Native Queries catalog 2",
+            "Enabled":        true,
+            "Order":          1000,
+            "SearchPattern":  "(?<Start>Catalog[\\s]*=[\\s]*)(?<Catalog>\"hive_metastore\")",
+            "ReplacePattern": "${Start}Catalog"
+        }     
+    ],
+
+
+    "Folders":
+    [
+        {
+            "Path":                 "./_demo",
+            "IncludeAll":           false,
+
+            "RefreshAfterUpdate":   null,
+            "Properties":           {}, 
+
+            "Parameterize":         null,
+            "Parameters":           null,
+            
+            "Datasets": [
+                {
+                    "Name":         "HMS",
+                    "Skip":         false,
+                    "Properties":   {},
+
+                    "Parameterize": null,
+                    "Parameters":   null,
+
+                    "Updates":      null
+                },
+                {
+                    "Name":         "HMS-incremental-refresh",
+                    "Skip":         false,
+                    "Properties":   {},
+
+                    "Parameterize": null,
+                    "Parameters":   null,
+
+                    "Updates":      null
+                }
+            ]
+        }
+    ],
+
+    "Workspaces":
+    [
+        
+    ]
+}

@@ -1,0 +1,48 @@
+table region
+	lineageTag: 2003a004-858c-4b58-9a33-96ed06c51e4b
+
+	column r_regionkey
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: d2d006d9-fde3-4f5a-9e07-adbd8dc3c81b
+		summarizeBy: none
+		sourceColumn: r_regionkey
+
+		annotation SummarizationSetBy = Automatic
+
+	column r_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nchar
+		lineageTag: a95ba0a7-6b26-422a-bf66-761078cd72cf
+		summarizeBy: none
+		sourceColumn: r_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column r_comment
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(152)
+		lineageTag: 904acf0a-a2eb-47e1-af24-aaac9eb554db
+		summarizeBy: none
+		sourceColumn: r_comment
+
+		annotation SummarizationSetBy = Automatic
+
+	partition region = m
+		mode: directQuery
+		source =
+				let
+				    Source = AmazonRedshift.Database("redshift-cluster-pbi-accelerator.czqsva194jk4.us-west-2.redshift.amazonaws.com:5439","sample_data_dev"),
+				    tpch = Source{[Name="tpch"]}[Data],
+				    region = tpch{[Name="region"]}[Data]
+				in
+				    region
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

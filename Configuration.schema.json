@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/databricks-solution/powerbi-on-databricks-migration-accelerator/blob/main/Configuration.schema.json",
+  "title": "Power BI on Databricks Migration Accelerator Configuration",
+  "description": "Configuration schema for PowerBI-migration-accelerator.ps1.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema":            { "type": "string" },
+    "Backup":             { "type": ["boolean", "null"] },
+    "RefreshAfterUpdate": { "type": ["boolean", "null"] },
+    "Parameterize":       { "type": ["boolean", "null"] },
+    "Properties":         { "$ref": "#/definitions/Properties" },
+    "Parameters":         { "type": ["array", "null"], "items": { "$ref": "#/definitions/Parameter" } },
+    "Updates":            { "type": ["array", "null"], "items": { "$ref": "#/definitions/Update" } },
+    "SkipTables":         { "type": ["array", "null"], "items": { "type": "string", "minLength": 1 } },
+    "Workspaces":         { "type": ["array", "null"], "items": { "$ref": "#/definitions/Workspace" } },
+    "Folders":            { "type": ["array", "null"], "items": { "$ref": "#/definitions/Folder" } }
+  },
+  "definitions": {
+    "Properties": {
+      "type": ["object", "array", "null"],
+      "description": "Object with model properties. An empty array is tolerated for backwards compatibility but the object form is preferred.",
+      "additionalProperties": false,
+      "properties": {
+        "CompatibilityLevel":              { "type": ["integer", "null"], "minimum": 1200 },
+        "MaxParallelismPerQuery":          { "type": ["integer", "null"], "minimum": 0 },
+        "DataSourceDefaultMaxConnections": { "type": ["integer", "null"], "minimum": 0 }
+      }
+    },
+    "Parameter": {
+      "type": "object",
+      "required": ["Name", "Value", "Type"],
+      "additionalProperties": false,
+      "properties": {
+        "Name":  { "type": "string", "minLength": 1 },
+        "Value": { "type": ["string", "number", "boolean"] },
+        "Type":  { "type": "string", "enum": ["Text", "Number", "Decimal Number", "True/False", "Date", "Date/Time", "Duration", "Binary", "Any"] }
+      }
+    },
+    "Callback": {
+      "type": "object",
+      "required": ["Module", "Function"],
+      "additionalProperties": false,
+      "properties": {
+        "Module":   { "type": "string", "minLength": 1, "description": "Path to .psm1 relative to repo root (or absolute)." },
+        "Function": { "type": "string", "minLength": 1, "description": "Verb-Noun function name exported by the module." }
+      }
+    },
+    "Update": {
+      "type": "object",
+      "required": ["Name", "Enabled", "Order", "SearchPattern"],
+      "additionalProperties": true,
+      "properties": {
+        "Name":           { "type": "string", "minLength": 1 },
+        "Enabled":        { "type": "boolean" },
+        "Order":          { "type": "integer", "minimum": 0 },
+        "SearchPattern":  { "type": "string", "minLength": 1, "description": ".NET regular expression (IgnoreCase, CultureInvariant, Multiline)." },
+        "ReplacePattern": { "type": ["string", "null"] },
+        "Callback":       { "oneOf": [ { "$ref": "#/definitions/Callback" }, { "type": "null" } ] }
+      }
+    },
+    "Dataset": {
+      "type": "object",
+      "required": ["Name"],
+      "additionalProperties": false,
+      "properties": {
+        "Name":         { "type": "string", "minLength": 1 },
+        "Skip":         { "type": ["boolean", "null"] },
+        "Properties":   { "$ref": "#/definitions/Properties" },
+        "Parameterize": { "type": ["boolean", "null"] },
+        "Parameters":   { "type": ["array", "null"], "items": { "$ref": "#/definitions/Parameter" } },
+        "Updates":      { "type": ["array", "null"], "items": { "$ref": "#/definitions/Update" } },
+        "SkipTables":   { "type": ["array", "null"], "items": { "type": "string", "minLength": 1 } },
+        "RefreshAfterUpdate": { "type": ["boolean", "null"] }
+      }
+    },
+    "Workspace": {
+      "type": "object",
+      "required": ["WorkspaceUrl"],
+      "additionalProperties": true,
+      "properties": {
+        "WorkspaceUrl":       { "type": "string", "minLength": 1 },
+        "IncludeAll":         { "type": ["boolean", "null"] },
+        "RefreshAfterUpdate": { "type": ["boolean", "null"] },
+        "Skip":               { "type": ["boolean", "null"] },
+        "Properties":         { "$ref": "#/definitions/Properties" },
+        "Parameterize":       { "type": ["boolean", "null"] },
+        "Parameters":         { "type": ["array", "null"], "items": { "$ref": "#/definitions/Parameter" } },
+        "Updates":            { "type": ["array", "null"], "items": { "$ref": "#/definitions/Update" } },
+        "SkipTables":         { "type": ["array", "null"], "items": { "type": "string", "minLength": 1 } },
+        "Datasets":           { "type": ["array", "null"], "items": { "$ref": "#/definitions/Dataset" } }
+      }
+    },
+    "Folder": {
+      "type": "object",
+      "required": ["Path"],
+      "additionalProperties": true,
+      "properties": {
+        "Path":               { "type": "string", "minLength": 1 },
+        "IncludeAll":         { "type": ["boolean", "null"] },
+        "RefreshAfterUpdate": { "type": ["boolean", "null"] },
+        "Properties":         { "$ref": "#/definitions/Properties" },
+        "Parameterize":       { "type": ["boolean", "null"] },
+        "Parameters":         { "type": ["array", "null"], "items": { "$ref": "#/definitions/Parameter" } },
+        "Updates":            { "type": ["array", "null"], "items": { "$ref": "#/definitions/Update" } },
+        "SkipTables":         { "type": ["array", "null"], "items": { "type": "string", "minLength": 1 } },
+        "Datasets":           { "type": ["array", "null"], "items": { "$ref": "#/definitions/Dataset" } }
+      }
+    }
+  }
+}

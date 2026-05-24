@@ -1,0 +1,49 @@
+table region
+	lineageTag: c9697af8-8120-452b-86fe-d30eb38b5205
+
+	column R_REGIONKEY
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 64b1eb63-6ab4-432d-9cf5-352dd7b1b636
+		summarizeBy: none
+		sourceColumn: R_REGIONKEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column R_NAME
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(25)
+		lineageTag: c9f1d6a5-d9a6-47eb-8acf-bcf6d5ac2042
+		summarizeBy: none
+		sourceColumn: R_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column R_COMMENT
+		dataType: string
+		sourceProviderType: nvarchar(152)
+		lineageTag: da863dd2-77df-4af8-8316-1dfb2d7cb7e5
+		summarizeBy: none
+		sourceColumn: R_COMMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition region = m
+		mode: dual
+		source =
+				let
+				    Source = Snowflake.Databases("tximbzh-hu22536.snowflakecomputing.com","COMPUTE_WH"),
+				    SNOWFLAKE_TPCH_Database = Source{[Name="SNOWFLAKE_SAMPLE_DATA",Kind="Database"]}[Data],
+				    TPCH_SF1_Schema = SNOWFLAKE_TPCH_Database{[Name="TPCH_SF1",Kind="Schema"]}[Data],
+				    REGION_Table = TPCH_SF1_Schema{[Name="REGION",Kind="Table"]}[Data]
+				in
+				    REGION_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

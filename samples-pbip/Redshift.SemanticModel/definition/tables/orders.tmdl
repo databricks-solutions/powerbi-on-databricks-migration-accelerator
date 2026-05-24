@@ -1,0 +1,115 @@
+table orders
+	lineageTag: d0235469-809b-48a4-aff2-a6fbf2e135eb
+
+	column o_orderkey
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 545ab0a4-8860-4bc5-98fb-f2683a8927b8
+		summarizeBy: none
+		sourceColumn: o_orderkey
+
+		annotation SummarizationSetBy = Automatic
+
+	column o_custkey
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: a10ce915-e459-4c06-b14c-a851b34bd489
+		summarizeBy: none
+		sourceColumn: o_custkey
+
+		annotation SummarizationSetBy = Automatic
+
+	column o_orderstatus
+		dataType: string
+		isNullable: false
+		sourceProviderType: nchar
+		lineageTag: b2cf8977-4010-4c88-bbcb-9b6c8f5792ae
+		summarizeBy: none
+		sourceColumn: o_orderstatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column o_totalprice
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(12, 2)
+		lineageTag: f7961c1e-044e-4d50-a123-6c7520339895
+		summarizeBy: sum
+		sourceColumn: o_totalprice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column o_orderdate
+		dataType: dateTime
+		isNullable: false
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: f4c31ce7-046b-45c2-8a76-25cd0bc94187
+		summarizeBy: none
+		sourceColumn: o_orderdate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column o_orderpriority
+		dataType: string
+		isNullable: false
+		sourceProviderType: nchar
+		lineageTag: ecbc695a-818e-40d7-91dc-ef64e0f4f2c6
+		summarizeBy: none
+		sourceColumn: o_orderpriority
+
+		annotation SummarizationSetBy = Automatic
+
+	column o_clerk
+		dataType: string
+		isNullable: false
+		sourceProviderType: nchar
+		lineageTag: f1be5984-9626-4872-8eaa-ec894ee06663
+		summarizeBy: none
+		sourceColumn: o_clerk
+
+		annotation SummarizationSetBy = Automatic
+
+	column o_shippriority
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: bcf816bc-2e34-481f-9d71-e322504e347a
+		summarizeBy: sum
+		sourceColumn: o_shippriority
+
+		annotation SummarizationSetBy = Automatic
+
+	column o_comment
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(79)
+		lineageTag: e2f5a640-c9ad-4490-a57e-649ec1167971
+		summarizeBy: none
+		sourceColumn: o_comment
+
+		annotation SummarizationSetBy = Automatic
+
+	partition orders = m
+		mode: directQuery
+		source =
+				let
+				    Source = AmazonRedshift.Database("redshift-cluster-pbi-accelerator.czqsva194jk4.us-west-2.redshift.amazonaws.com:5439","sample_data_dev"),
+				    tpch = Source{[Name="tpch"]}[Data],
+				    orders = tpch{[Name="orders"]}[Data]
+				in
+				    orders
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

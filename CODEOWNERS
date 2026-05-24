@@ -1,0 +1,14 @@
+# CODEOWNERS for powerbi-on-databricks-migration-accelerator
+# 
+# This file defines individuals or teams responsible for code in this repository.
+# More information: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owners for everything in the repo
+* @AMirskiy
+
+# Owners for the .github directory (workflows, issue templates, etc.)
+/.github @AMirskiy @mhmdburton1990
+
+# Owners for the source code
+/src @AMirskiy @mhmdburton1990
+

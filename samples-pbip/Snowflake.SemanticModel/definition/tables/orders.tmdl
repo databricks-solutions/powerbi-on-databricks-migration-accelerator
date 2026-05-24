@@ -1,0 +1,119 @@
+table orders
+	lineageTag: 533c3ba2-14ae-4c54-87d1-fe8ee065db5f
+
+	column O_ORDERKEY
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(38, 0)
+		lineageTag: ddfc4351-aa44-4f36-ad99-1a192371c667
+		summarizeBy: none
+		sourceColumn: O_ORDERKEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column O_CUSTKEY
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 10019f23-002f-45a6-9692-e3f0702b282e
+		summarizeBy: none
+		sourceColumn: O_CUSTKEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column O_ORDERSTATUS
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(1)
+		lineageTag: 09037ab6-9dd2-4846-b9fd-efac2c340174
+		summarizeBy: none
+		sourceColumn: O_ORDERSTATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_TOTALPRICE
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(12, 2)
+		lineageTag: c4f59d82-08dc-4a83-b29a-6a447c95af1d
+		summarizeBy: sum
+		sourceColumn: O_TOTALPRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column O_ORDERDATE
+		dataType: dateTime
+		isNullable: false
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: e507c3dd-d250-493c-86b2-fc9d58e58785
+		summarizeBy: none
+		sourceColumn: O_ORDERDATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column O_ORDERPRIORITY
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(15)
+		lineageTag: 7f3a6fe9-9119-4c75-afb2-485b7192138e
+		summarizeBy: none
+		sourceColumn: O_ORDERPRIORITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_CLERK
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(15)
+		lineageTag: 63182f1e-9b7c-4011-a674-088e37c6c331
+		summarizeBy: none
+		sourceColumn: O_CLERK
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_SHIPPRIORITY
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 0acd4939-1f9f-4c11-8864-b0df8b982809
+		summarizeBy: sum
+		sourceColumn: O_SHIPPRIORITY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column O_COMMENT
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(79)
+		lineageTag: 6b509c16-c846-45f9-a596-08348bd02e67
+		summarizeBy: none
+		sourceColumn: O_COMMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition orders = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("tximbzh-hu22536.snowflakecomputing.com","COMPUTE_WH"),
+				    SNOWFLAKE_TPCH_Database = Source{[Name="SNOWFLAKE_SAMPLE_DATA",Kind="Database"]}[Data],
+				    TPCH_SF1_Schema = SNOWFLAKE_TPCH_Database{[Name="TPCH_SF1",Kind="Schema"]}[Data],
+				    ORDERS_Table = TPCH_SF1_Schema{[Name="ORDERS",Kind="Table"]}[Data]
+				in
+				    ORDERS_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,100 @@
+table customer
+	lineageTag: 79e84e75-9d5d-4e5b-850d-bf16978066d1
+
+	column C_CUSTKEY
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: a220af3f-e455-4032-a17d-73110174f462
+		summarizeBy: none
+		sourceColumn: C_CUSTKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column C_NAME
+		dataType: string
+		isNullable: false
+		sourceProviderType: varchar(25)
+		lineageTag: ba71ccd5-88cb-4868-9d13-90626633f6c7
+		summarizeBy: none
+		sourceColumn: C_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column C_ADDRESS
+		dataType: string
+		isNullable: false
+		sourceProviderType: varchar(40)
+		lineageTag: a19eee08-7444-4d34-909d-0a180db87df2
+		summarizeBy: none
+		sourceColumn: C_ADDRESS
+
+		annotation SummarizationSetBy = Automatic
+
+	column C_NATIONKEY
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 75ac0427-cff8-418e-83ab-37ac65cb256a
+		summarizeBy: none
+		sourceColumn: C_NATIONKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column C_PHONE
+		dataType: string
+		isNullable: false
+		sourceProviderType: char
+		lineageTag: f006f8b1-8d61-4852-bb86-f3336ad5130d
+		summarizeBy: none
+		sourceColumn: C_PHONE
+
+		annotation SummarizationSetBy = Automatic
+
+	column C_ACCTBAL
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(15, 2)
+		lineageTag: 97ca274d-af8a-4202-a1b3-46fe204b3228
+		summarizeBy: sum
+		sourceColumn: C_ACCTBAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column C_MKTSEGMENT
+		dataType: string
+		isNullable: false
+		sourceProviderType: char
+		lineageTag: 620be50e-9fc7-4749-9ce5-76609a759330
+		summarizeBy: none
+		sourceColumn: C_MKTSEGMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column C_COMMENT
+		dataType: string
+		isNullable: false
+		sourceProviderType: varchar(117)
+		lineageTag: 11af4f81-935f-4554-ad5d-7df9b16a1076
+		summarizeBy: none
+		sourceColumn: C_COMMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition customer = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("synapse-migration-demo.sql.azuresynapse.net", "tpch"),
+				    dbo_CUSTOMER = Source{[Schema="dbo",Item="CUSTOMER"]}[Data]
+				in
+				    dbo_CUSTOMER
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

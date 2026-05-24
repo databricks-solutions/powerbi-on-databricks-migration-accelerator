@@ -1,0 +1,95 @@
+table orders
+	lineageTag: 533c3ba2-14ae-4c54-87d1-fe8ee065db5f
+
+	refreshPolicy
+		policyType: basic
+		mode: hybrid
+		rollingWindowGranularity: year
+		rollingWindowPeriods: 10
+		incrementalGranularity: day
+		incrementalPeriods: 10
+		incrementalPeriodsOffset: -1
+		sourceExpression =
+			let
+			    Source = Databricks.Catalogs("adb-2219810816778143.3.azuredatabricks.net", "/sql/1.0/warehouses/6fdebb669d2772a3", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+			    samples_Database = Source{[Name="hive_metastore",Kind="Database"]}[Data],
+			    tpch_Schema = samples_Database{[Name="tpch_sf1_delta_nopartitions",Kind="Schema"]}[Data],
+			    orders_Table = tpch_Schema{[Name="orders",Kind="Table"]}[Data],
+			    #"Removed Columns" = Table.RemoveColumns(orders_Table,{"O_CLERK", "O_COMMENT", "O_TOTALPRICE"}),
+			    #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns",{{"O_ORDERDATE", type datetime}}),
+			    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each [O_ORDERDATE] >= RangeStart and [O_ORDERDATE] < RangeEnd)
+			in
+			    #"Filtered Rows"
+
+	column O_ORDERKEY
+		dataType: int64
+		formatString: 0
+		lineageTag: 9232baf8-8df2-45ef-8f60-c1215e40fb6f
+		summarizeBy: sum
+		sourceColumn: O_ORDERKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_CUSTKEY
+		dataType: int64
+		formatString: 0
+		lineageTag: c3aa1d8a-ff1d-4bc1-bc14-d9ec975d3e2c
+		summarizeBy: none
+		sourceColumn: O_CUSTKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_ORDERSTATUS
+		dataType: string
+		lineageTag: 9e1a1e0f-d6e4-4856-860d-71534ddab597
+		summarizeBy: none
+		sourceColumn: O_ORDERSTATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_ORDERDATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: bcdd4236-8f4d-4cf5-8943-abc132b5c04c
+		summarizeBy: none
+		sourceColumn: O_ORDERDATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_ORDERPRIORITY
+		dataType: string
+		lineageTag: 3682643f-5605-46e0-9fc8-de18cad01388
+		summarizeBy: none
+		sourceColumn: O_ORDERPRIORITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_SHIPPRIORITY
+		dataType: int64
+		formatString: 0
+		lineageTag: 4edd71f4-1caa-41b4-8d7b-11bda4481094
+		summarizeBy: sum
+		sourceColumn: O_SHIPPRIORITY
+
+		annotation SummarizationSetBy = Automatic
+
+	partition orders = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-2219810816778143.3.azuredatabricks.net", "/sql/1.0/warehouses/6fdebb669d2772a3", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    samples_Database = Source{[Name="hive_metastore",Kind="Database"]}[Data],
+				    tpch_Schema = samples_Database{[Name="tpch_sf1_delta_nopartitions",Kind="Schema"]}[Data],
+				    orders_Table = tpch_Schema{[Name="orders",Kind="Table"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(orders_Table,{"O_CLERK", "O_COMMENT", "O_TOTALPRICE"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns",{{"O_ORDERDATE", type datetime}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each [O_ORDERDATE] >= RangeStart and [O_ORDERDATE] < RangeEnd)
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_IsMQueryFoldable = True
+

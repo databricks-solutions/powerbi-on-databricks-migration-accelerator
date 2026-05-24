@@ -1,0 +1,107 @@
+table orders
+	lineageTag: 533c3ba2-14ae-4c54-87d1-fe8ee065db5f
+
+	column O_ORDERKEY
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: c0ed9265-d2e7-4540-bafa-d0b736411a3b
+		summarizeBy: none
+		sourceColumn: O_ORDERKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_CUSTKEY
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: c2a3ea0e-0cdf-4352-9a80-582910b20ae5
+		summarizeBy: none
+		sourceColumn: O_CUSTKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_ORDERSTATUS
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: bd4eb1b7-bb9a-4b47-b9e4-40e8c3dfed58
+		summarizeBy: none
+		sourceColumn: O_ORDERSTATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_TOTALPRICE
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: 2baec1fc-c147-479e-a70b-8e3773fbe1c6
+		summarizeBy: sum
+		sourceColumn: O_TOTALPRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column O_ORDERDATE
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 47cc3e2f-40c8-4aba-babe-ec6d620f87d0
+		summarizeBy: none
+		sourceColumn: O_ORDERDATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column O_ORDERPRIORITY
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 6a7acff6-69f7-4c2c-aebd-6808b7a5d9cf
+		summarizeBy: none
+		sourceColumn: O_ORDERPRIORITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_CLERK
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: b772e18d-ea6c-4d86-8896-bd1869b8aea4
+		summarizeBy: none
+		sourceColumn: O_CLERK
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_SHIPPRIORITY
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 8b3e5158-aa95-4b1b-b83d-3af23cfde84c
+		summarizeBy: sum
+		sourceColumn: O_SHIPPRIORITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_COMMENT
+		dataType: string
+		sourceProviderType: nvarchar(65535)
+		lineageTag: 6d9e5e96-1b22-4055-a537-baa58e5b7664
+		summarizeBy: none
+		sourceColumn: O_COMMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition orders = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-2219810816778143.3.azuredatabricks.net", "/sql/1.0/warehouses/6fdebb669d2772a3", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    samples_Database = Source{[Name="tpch",Kind="Database"]}[Data],
+				    tpch_Schema = samples_Database{[Name="sf1",Kind="Schema"]}[Data],
+				    orders_Table = tpch_Schema{[Name="orders",Kind="Table"]}[Data]
+				in
+				    orders_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,101 @@
+table customer
+	lineageTag: 3c22329d-a922-4755-95b2-84cb4d9b55b4
+
+	column c_custkey
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 73b07b5e-3093-4dec-9f73-9abd5eb1d4fc
+		summarizeBy: none
+		sourceColumn: c_custkey
+
+		annotation SummarizationSetBy = Automatic
+
+	column c_name
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(25)
+		lineageTag: 67cee4f2-d652-4aec-9e86-04ab13f5f3cd
+		summarizeBy: none
+		sourceColumn: c_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column c_address
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(40)
+		lineageTag: 2d9b51ce-c111-4689-a142-8904f93c2046
+		summarizeBy: none
+		sourceColumn: c_address
+
+		annotation SummarizationSetBy = Automatic
+
+	column c_nationkey
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f8370108-eff8-4bae-86e2-a8a8949d67aa
+		summarizeBy: none
+		sourceColumn: c_nationkey
+
+		annotation SummarizationSetBy = Automatic
+
+	column c_phone
+		dataType: string
+		isNullable: false
+		sourceProviderType: nchar
+		lineageTag: 868f0143-6eec-42cb-a2f0-835baa22600a
+		summarizeBy: none
+		sourceColumn: c_phone
+
+		annotation SummarizationSetBy = Automatic
+
+	column c_acctbal
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(12, 2)
+		lineageTag: a0dcd04c-32c2-495e-9708-c6782b6a972e
+		summarizeBy: sum
+		sourceColumn: c_acctbal
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column c_mktsegment
+		dataType: string
+		isNullable: false
+		sourceProviderType: nchar
+		lineageTag: c074d801-203d-465a-9ffd-9e81e7378bd4
+		summarizeBy: none
+		sourceColumn: c_mktsegment
+
+		annotation SummarizationSetBy = Automatic
+
+	column c_comment
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(117)
+		lineageTag: 11bc9f27-df95-443e-b8c0-f4211fcc51dd
+		summarizeBy: none
+		sourceColumn: c_comment
+
+		annotation SummarizationSetBy = Automatic
+
+	partition customer = m
+		mode: directQuery
+		source =
+				let
+				    Source = AmazonRedshift.Database("redshift-cluster-pbi-accelerator.czqsva194jk4.us-west-2.redshift.amazonaws.com:5439","sample_data_dev"),
+				    tpch = Source{[Name="tpch"]}[Data],
+				    customer = tpch{[Name="customer"]}[Data]
+				in
+				    customer
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

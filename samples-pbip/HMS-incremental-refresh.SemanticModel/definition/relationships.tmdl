@@ -1,0 +1,12 @@
+relationship 12894e44-18fa-ff44-b134-69cfe81d2d79
+	fromColumn: nation.N_REGIONKEY
+	toColumn: region.R_REGIONKEY
+
+relationship 69f03663-cba3-1a69-74a8-4be756b40d61
+	fromColumn: customer.C_NATIONKEY
+	toColumn: nation.N_NATIONKEY
+
+relationship daee98a6-7227-3be1-a95b-9716ee3ebcc4
+	fromColumn: orders.O_CUSTKEY
+	toColumn: customer.C_CUSTKEY
+

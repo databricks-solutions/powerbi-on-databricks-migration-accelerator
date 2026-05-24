@@ -1,0 +1,52 @@
+table nation
+	lineageTag: e144a950-66fe-401f-8938-ae096186d5fb
+
+	column N_NATIONKEY
+		dataType: int64
+		formatString: 0
+		lineageTag: a7a50ba0-7339-4083-8857-79c84a341840
+		summarizeBy: none
+		sourceColumn: N_NATIONKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column N_NAME
+		dataType: string
+		lineageTag: 81358faa-7989-44b4-9720-fac7f721b8d3
+		summarizeBy: none
+		sourceColumn: N_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column N_REGIONKEY
+		dataType: int64
+		formatString: 0
+		lineageTag: 13186285-2314-4577-9701-7cf186ff9561
+		summarizeBy: none
+		sourceColumn: N_REGIONKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column N_COMMENT
+		dataType: string
+		lineageTag: 01701971-8c4c-45fc-9d3e-1147bd4a60a5
+		summarizeBy: none
+		sourceColumn: N_COMMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition nation = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-2219810816778143.3.azuredatabricks.net", "/sql/1.0/warehouses/6fdebb669d2772a3", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    samples_Database = Source{[Name="hive_metastore",Kind="Database"]}[Data],
+				    tpch_Schema = samples_Database{[Name="tpch_sf1_delta_nopartitions",Kind="Schema"]}[Data],
+				    nation_Table = tpch_Schema{[Name="nation",Kind="Table"]}[Data]
+				in
+				    nation_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

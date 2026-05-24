@@ -1,0 +1,102 @@
+table customer
+	lineageTag: 79e84e75-9d5d-4e5b-850d-bf16978066d1
+
+	column C_CUSTKEY
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(38, 0)
+		lineageTag: 1d488b7a-a8e8-40d5-a4e8-79c6520924a7
+		summarizeBy: none
+		sourceColumn: C_CUSTKEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column C_NAME
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(25)
+		lineageTag: b5eb5997-383e-4009-92fb-1e5f40d6c3f9
+		summarizeBy: none
+		sourceColumn: C_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column C_ADDRESS
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(40)
+		lineageTag: 58e09e72-49e3-4f98-a177-eaf9cb738b29
+		summarizeBy: none
+		sourceColumn: C_ADDRESS
+
+		annotation SummarizationSetBy = Automatic
+
+	column C_NATIONKEY
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(38, 0)
+		lineageTag: e95e55d4-807b-4713-a081-56f24ea53c6d
+		summarizeBy: none
+		sourceColumn: C_NATIONKEY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column C_PHONE
+		dataType: string
+		isNullable: false
+		sourceProviderType: nvarchar(15)
+		lineageTag: d2e242c9-09fe-4713-a146-4a0f9d77e4de
+		summarizeBy: none
+		sourceColumn: C_PHONE
+
+		annotation SummarizationSetBy = Automatic
+
+	column C_ACCTBAL
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(12, 2)
+		lineageTag: 7ce26818-99c2-489c-ae26-bd3c78e3ea91
+		summarizeBy: sum
+		sourceColumn: C_ACCTBAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column C_MKTSEGMENT
+		dataType: string
+		sourceProviderType: nvarchar(10)
+		lineageTag: 886dd704-659e-4b33-a4db-030f71594b28
+		summarizeBy: none
+		sourceColumn: C_MKTSEGMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column C_COMMENT
+		dataType: string
+		sourceProviderType: nvarchar(117)
+		lineageTag: 86f7aec2-fc54-44b2-a85b-17bf7fe9d8fe
+		summarizeBy: none
+		sourceColumn: C_COMMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition customer = m
+		mode: directQuery
+		source =
+				let
+				    Source = Snowflake.Databases("tximbzh-hu22536.snowflakecomputing.com","COMPUTE_WH"),
+				    SNOWFLAKE_TPCH_Database = Source{[Name="SNOWFLAKE_SAMPLE_DATA",Kind="Database"]}[Data],
+				    TPCH_SF1_Schema = SNOWFLAKE_TPCH_Database{[Name="TPCH_SF1",Kind="Schema"]}[Data],
+				    CUSTOMER_Table = TPCH_SF1_Schema{[Name="CUSTOMER",Kind="Table"]}[Data]
+				in
+				    CUSTOMER_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

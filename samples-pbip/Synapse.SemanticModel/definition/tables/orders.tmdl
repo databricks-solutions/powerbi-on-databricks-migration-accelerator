@@ -1,0 +1,114 @@
+table orders
+	lineageTag: 533c3ba2-14ae-4c54-87d1-fe8ee065db5f
+
+	column O_ORDERKEY
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2fcd0144-4df1-4ca4-8b37-5c12d7a57c5d
+		summarizeBy: none
+		sourceColumn: O_ORDERKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_CUSTKEY
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 02c6474b-f742-499c-9124-cb6a010694b1
+		summarizeBy: none
+		sourceColumn: O_CUSTKEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_ORDERSTATUS
+		dataType: string
+		isNullable: false
+		sourceProviderType: char
+		lineageTag: 018c9c09-982e-45cf-a0af-ff9f42196c55
+		summarizeBy: none
+		sourceColumn: O_ORDERSTATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_TOTALPRICE
+		dataType: double
+		isNullable: false
+		sourceProviderType: decimal(15, 2)
+		lineageTag: 31eb9afe-5f57-4efd-9d59-c0e59a855541
+		summarizeBy: sum
+		sourceColumn: O_TOTALPRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column O_ORDERDATE
+		dataType: dateTime
+		isNullable: false
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: b3a8be92-54a0-4d9e-800e-12a9335bec29
+		summarizeBy: none
+		sourceColumn: O_ORDERDATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column O_ORDERPRIORITY
+		dataType: string
+		isNullable: false
+		sourceProviderType: char
+		lineageTag: fc63d2d1-43f1-4ea5-8bb2-ee368f242645
+		summarizeBy: none
+		sourceColumn: O_ORDERPRIORITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_CLERK
+		dataType: string
+		isNullable: false
+		sourceProviderType: char
+		lineageTag: da34dda4-294d-4cbd-be54-6573fb261244
+		summarizeBy: none
+		sourceColumn: O_CLERK
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_SHIPPRIORITY
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6d75b0c9-0c52-4fbe-b5ba-2c219a690af8
+		summarizeBy: sum
+		sourceColumn: O_SHIPPRIORITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column O_COMMENT
+		dataType: string
+		isNullable: false
+		sourceProviderType: varchar(79)
+		lineageTag: 1a6f7aa3-005c-43cb-9b48-182cf75737e2
+		summarizeBy: none
+		sourceColumn: O_COMMENT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition orders = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("synapse-migration-demo.sql.azuresynapse.net", "tpch"),
+				    dbo_ORDERS = Source{[Schema="dbo",Item="ORDERS"]}[Data]
+				in
+				    dbo_ORDERS
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

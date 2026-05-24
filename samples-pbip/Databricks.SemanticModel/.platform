@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Databricks"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "d349e809-d077-4a8b-ad67-8706abbd3ba2"
+  }
+}

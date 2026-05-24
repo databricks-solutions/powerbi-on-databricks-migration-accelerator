@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Synapse"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "f195cde4-4c0f-4bcf-b4b6-a0cc10138099"
+  }
+}
