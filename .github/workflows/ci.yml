@@ -10,7 +10,7 @@ on:
 
 permissions:
   contents: read
-
+  
 jobs:
   lint-and-test:
     name: PSScriptAnalyzer + Pester
@@ -29,7 +29,7 @@ jobs:
         shell: pwsh
         run: |
           Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-          Install-Module -Name Pester -RequiredVersion 5.5.0 -Force -Scope CurrentUser
+          Install-Module -Name Pester -RequiredVersion 5.5.0 -Force -Scope CurrentUser 
           Install-Module -Name PSScriptAnalyzer -RequiredVersion 1.22.0 -Force -Scope CurrentUser
 
       - name: Run PSScriptAnalyzer
